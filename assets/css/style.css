@@ -157,6 +157,7 @@
     padding: 6px 0;
     display: block;
     transition: all 0.3s;
+    font-size: 13px;
 }
 
 .mega-menu-list a:hover {
@@ -689,7 +690,7 @@
 
 /* Newsletter */
 .oneclick-newsletter-section {
-    background: var(--oci-gradient);
+    background: #0c7481;
     color: white;
     padding: 50px 0;
 }

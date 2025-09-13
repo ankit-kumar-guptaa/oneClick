@@ -32,12 +32,9 @@
                     <div class="col-lg-4">
                         <div class="footer-brand">
                             <div class="brand-logo mb-3">
-                                <div class="logo-icon">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
+                               
                                 <div class="logo-text">
-                                    <span class="brand-name">OneClick</span>
-                                    <span class="brand-tagline">Insurance</span>
+                                    <img src="assets/img/dark-logo.png" style="width: 200px;," alt="OneClick Insurance" class="brand-logo-image"> 
                                 </div>
                             </div>
                             <p class="footer-desc">

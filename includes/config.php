@@ -8,7 +8,7 @@ define('DB_NAME', 'oneclick_insurance');
 // Site Configuration
 define('SITE_URL', 'http://localhost/OneClick Insurance/');
 define('SITE_NAME', 'OneClick Insurance');
-define('SITE_EMAIL', 'support@oneclickinsurance.com');
+define('SITE_EMAIL', 'support@oneclickinsurer.com');
 
 // Security Configuration
 define('ENCRYPTION_KEY', 'your_unique_encryption_key_here');

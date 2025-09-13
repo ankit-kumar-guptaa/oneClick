@@ -55,7 +55,7 @@
                             <span class="brand-tagline">Insurance</span>
                         </div> -->
 
-                        <img src="assets/img/logo.png" style="width: 200px;," alt="OneClick Insurance" class="brand-logo-image">
+                        <img src="assets/img/logo.jpg" style="width: 200px;," alt="OneClick Insurance" class="brand-logo-image">
                     </div>
                 </a>
 

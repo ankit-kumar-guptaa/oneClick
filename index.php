@@ -594,5 +594,25 @@ require_once 'routes/web.php';
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="assets/js/script.js"></script>
+    <!-- Phone Number Popup Form -->
+    <div class="oneclick-popup-overlay" id="phonePopup">
+        <div class="oneclick-popup-form">
+            <button class="oneclick-popup-close" id="closePopup">&times;</button>
+            <h3 class="oneclick-popup-title">Get a Call Back</h3>
+            <form id="phoneCallbackForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Your Phone Number</label>
+                    <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter your phone number" required>
+                </div>
+                <button type="submit" class="btn oneclick-btn-primary">
+                    <i class="fas fa-phone"></i> Request Call Back
+                </button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

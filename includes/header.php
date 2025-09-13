@@ -1,61 +1,12 @@
-  <!-- Top Bar -->
-    <div class="oneclick-top-bar">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <div class="top-bar-info">
-                        <div class="info-item">
-                            <i class="fas fa-phone"></i>
-                            <span>Call: 1800-123-4567</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>support@oneclickinsurance.com</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-clock"></i>
-                            <span>24/7 Support Available</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="top-bar-actions">
-                        <a href="#" class="top-bar-link">
-                            <i class="fas fa-user"></i>
-                            Login
-                        </a>
-                        <a href="#" class="top-bar-link">
-                            <i class="fas fa-user-plus"></i>
-                            Register
-                        </a>
-                        <div class="language-switcher">
-                            <i class="fas fa-globe"></i>
-                            <select class="form-select form-select-sm">
-                                <option>English</option>
-                                <option>हिंदी</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Removed Top Bar -->
 
-    <!-- Main Header -->
+    <!-- Modern Header -->
     <header class="oneclick-header">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand oneclick-brand" href="index.php">
                     <div class="brand-logo">
-                        <!-- <div class="logo-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="logo-text">
-                            <span class="brand-name">OneClick</span>
-                            <span class="brand-tagline">Insurance</span>
-                        </div> -->
-
-                        <img src="assets/img/logo.jpg" style="width: 200px;," alt="OneClick Insurance" class="brand-logo-image">
+                        <img src="assets/img/logo.jpg" style="width: 160px;" alt="OneClick Insurance" class="brand-logo-image">
                     </div>
                 </a>
 
@@ -74,7 +25,7 @@
                         <li class="nav-item dropdown mega-dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                                 <i class="fas fa-car"></i>
-                                Motor Insurance
+                                Motor
                             </a>
                             <div class="dropdown-menu mega-menu">
                                 <div class="container">
@@ -113,7 +64,7 @@
                         <li class="nav-item dropdown mega-dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                                 <i class="fas fa-heartbeat"></i>
-                                Health Insurance
+                                Health
                             </a>
                             <div class="dropdown-menu mega-menu">
                                 <div class="container">
@@ -152,7 +103,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                                 <i class="fas fa-home"></i>
-                                Other Insurance
+                                Other
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#"><i class="fas fa-home"></i> Home Insurance</a></li>
@@ -164,16 +115,16 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <i class="fas fa-headset"></i>
-                                Support
+                                Help
                             </a>
                         </li>
                     </ul>
 
                     <div class="header-actions">
-                        <button class="btn oneclick-btn-outline me-2">
-                            <i class="fas fa-phone"></i>
-                            Call Expert
-                        </button>
+                        <a href="#" class="btn oneclick-btn-signin me-2">
+                            <i class="fas fa-user"></i>
+                            Sign In
+                        </a>
                         <button class="btn oneclick-btn-primary">
                             <i class="fas fa-search"></i>
                             Get Quote

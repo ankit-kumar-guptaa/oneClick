@@ -15,7 +15,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
-document.querySelector()
+// Removed empty document.querySelector() call
 
 
 // Add animation to cards on scroll
@@ -44,6 +44,7 @@ const observeCards = () => {
 // Initialize animations when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     observeCards();
+    setupModernHeader();
     
     // Add loading animation
     document.body.style.opacity = '0';
@@ -53,27 +54,52 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
 });
 
-// Header scroll effect
-let lastScrollTop = 0;
-const header = document.querySelector('.oneclick-header');
-
-window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+// Modern Header scroll effect
+const setupModernHeader = () => {
+    const header = document.querySelector('.oneclick-header');
+    const navbarToggler = document.querySelector('.navbar-toggler');
     
-    if (scrollTop > lastScrollTop && scrollTop > 100) {
-        // Scrolling down
-        header.style.transform = 'translateY(-100%)';
-    } else {
-        // Scrolling up
-        header.style.transform = 'translateY(0)';
+    if (!header) return;
+    
+    let lastScrollTop = 0;
+    
+    // Add scrolled class on scroll
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Add scrolled class for styling
+        if (scrollTop > 10) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        // Hide/show header on scroll direction
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scrolling down
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            // Scrolling up
+            header.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+    
+    // Add transition to header
+    header.style.transition = 'transform 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease';
+    
+    // Close navbar when clicking outside
+    if (navbarToggler) {
+        document.addEventListener('click', function(event) {
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            if (navbarCollapse && navbarCollapse.classList.contains('show') && 
+                !event.target.closest('.navbar-collapse') && 
+                !event.target.closest('.navbar-toggler')) {
+                navbarToggler.click();
+            }
+        });
     }
-    
-    lastScrollTop = scrollTop;
-});
-
-// Add transition to header
-if (header) {
-    header.style.transition = 'transform 0.3s ease';
 }
 
 // Form validation helper functions
@@ -223,6 +249,79 @@ const hideLoader = () => {
     }
 };
 
+// Popup Form Functionality
+const setupPopupForm = () => {
+    const popupOverlay = document.getElementById('phonePopup');
+    const closePopupBtn = document.getElementById('closePopup');
+    const callExpertBtns = document.querySelectorAll('.oneclick-btn-outline');
+    const phoneCallbackForm = document.getElementById('phoneCallbackForm');
+    const popupForm = document.querySelector('.oneclick-popup-form');
+    
+    if (!popupOverlay || !popupForm) return; // Exit if elements don't exist
+    
+    // Open popup when Call Expert button is clicked
+    callExpertBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            popupOverlay.classList.add('active');
+            setTimeout(() => {
+                popupForm.classList.add('active');
+            }, 100);
+        });
+    });
+    
+    // Close popup when close button is clicked
+    if (closePopupBtn) {
+        closePopupBtn.addEventListener('click', () => {
+            popupForm.classList.remove('active');
+            setTimeout(() => {
+                popupOverlay.classList.remove('active');
+            }, 300);
+        });
+    }
+    
+    // Close popup when clicking outside the form
+    popupOverlay.addEventListener('click', (e) => {
+        if (e.target === popupOverlay) {
+            popupForm.classList.remove('active');
+            setTimeout(() => {
+                popupOverlay.classList.remove('active');
+            }, 300);
+        }
+    });
+    
+    // Handle form submission
+    if (phoneCallbackForm) {
+        phoneCallbackForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            
+            if (validatePhone(phoneNumber)) {
+                // Show success notification
+                showNotification('Thank you! We will call you back shortly.', 'success');
+                
+                // Close popup after submission
+                setTimeout(() => {
+                    popupForm.classList.remove('active');
+                    setTimeout(() => {
+                        popupOverlay.classList.remove('active');
+                    }, 300);
+                }, 1000);
+                
+                // Reset form
+                phoneCallbackForm.reset();
+            } else {
+                // Show error notification
+                showNotification('Please enter a valid phone number.', 'error');
+            }
+        });
+    }
+};
+
+// Initialize popup form when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setupPopupForm();
+});
+
 // Export functions for use in other files
 window.OneclickInsurance = {
     validateEmail,
@@ -230,29 +329,36 @@ window.OneclickInsurance = {
     togglePasswordVisibility,
     showNotification,
     showLoader,
-    hideLoader
+    hideLoader,
+    setupPopupForm,
+    setupModernHeader
 };
 
 
 // Enhanced Hero Slider
-const heroSwiper = new Swiper('.heroSwiper', {
-    slidesPerView: 1,
-    spaceBetween: 0,
-    loop: true,
-    autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-    },
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    effect: 'fade',
-    fadeEffect: {
-        crossFade: true
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    const heroSwiper = new Swiper('.heroSwiper', {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        loop: true,
+        speed: 800, // Smooth transition speed
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        effect: 'slide', // Changed from fade to slide for smooth sliding effect
+        grabCursor: true,
+        touchEventsTarget: 'container',
+        preloadImages: true,
+        updateOnImagesReady: true,
+        watchSlidesProgress: true
+    });
 });

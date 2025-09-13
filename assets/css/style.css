@@ -61,31 +61,44 @@
     color: var(--oci-primary);
 }
 
-/* Header */
+/* Modern Header */
 .oneclick-header {
-    background: white;
-    box-shadow: var(--oci-shadow);
     position: sticky;
     top: 0;
+    background: white;
     z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    padding: 10px 0;
+    transition: all 0.3s ease;
 }
 
+.oneclick-header.scrolled {
+    padding: 5px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Brand Logo */
 .brand-logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+}
+
+.brand-logo-image {
+    width: 160px;
+    transition: all 0.3s ease;
 }
 
 .logo-icon {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     background: var(--oci-gradient);
-    border-radius: 12px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
 }
 
 .logo-text {
@@ -94,14 +107,14 @@
 }
 
 .brand-name {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 800;
     color: var(--oci-dark);
     line-height: 1;
 }
 
 .brand-tagline {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--oci-gray);
     font-weight: 500;
 }
@@ -110,35 +123,54 @@
 .navbar-nav .nav-link {
     font-weight: 600;
     color: var(--oci-dark) !important;
-    padding: 12px 16px !important;
+    padding: 10px 14px !important;
     border-radius: 8px;
     transition: all 0.3s;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
+    font-size: 14px;
 }
 
 .navbar-nav .nav-link:hover {
     background: var(--oci-light);
     color: var(--oci-primary) !important;
+    transform: translateY(-2px);
+}
+
+.navbar-nav .nav-link i {
+    font-size: 13px;
 }
 
 /* Mega Menu */
 .mega-dropdown .mega-menu {
-    width: 600px;
-    padding: 30px;
+    width: 580px;
+    padding: 25px;
     border: none;
     box-shadow: var(--oci-shadow-lg);
     border-radius: 12px;
     margin-top: 8px;
+    animation: fadeInDown 0.3s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .mega-menu-title {
     color: var(--oci-primary);
     font-weight: 700;
-    margin-bottom: 15px;
-    padding-bottom: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
     border-bottom: 2px solid var(--oci-light);
+    font-size: 15px;
 }
 
 .mega-menu-list {
@@ -147,28 +179,63 @@
 }
 
 .mega-menu-list li {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .mega-menu-list a {
     color: var(--oci-dark);
     text-decoration: none;
     font-weight: 500;
-    padding: 6px 0;
+    padding: 5px 0;
     display: block;
     transition: all 0.3s;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .mega-menu-list a:hover {
     color: var(--oci-primary);
-    padding-left: 10px;
+    padding-left: 8px;
+}
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.oneclick-btn-signin {
+    background: var(--oci-light);
+    color: var(--oci-primary);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.oneclick-btn-signin:hover {
+    background: var(--oci-primary-light);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.oneclick-btn-primary {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 /* Hero Section */
 .oneclick-hero-section {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    padding: 60px 0;
+    padding: 40px 0; /* Reduced padding */
     overflow: hidden;
     position: relative;
 }
@@ -188,7 +255,7 @@
 }
 
 .oneclick-hero-title {
-    font-size: 3.2rem;
+    font-size: 2.8rem; /* Reduced font size */
     font-weight: 800;
     line-height: 1.1;
     color: var(--oci-dark);
@@ -203,10 +270,10 @@
 }
 
 .oneclick-hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem; /* Reduced font size */
     color: var(--oci-gray);
     line-height: 1.6;
-    margin-bottom: 30px;
+    margin-bottom: 25px; /* Reduced margin */
 }
 
 .oneclick-hero-features {
@@ -306,7 +373,7 @@
 
 .oneclick-slider-card {
     position: relative;
-    height: 400px;
+    height: 350px; /* Reduced height */
     overflow: hidden;
 }
 
@@ -837,7 +904,32 @@
 }
 
 /* Responsive */
+@media (max-width: 992px) {
+    .navbar-nav .nav-link {
+        padding: 8px 12px !important;
+        font-size: 13px;
+    }
+    
+    .mega-dropdown .mega-menu {
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .oneclick-btn-signin, .oneclick-btn-primary {
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+}
+
 @media (max-width: 768px) {
+    .oneclick-header {
+        padding: 8px 0;
+    }
+    
+    .brand-logo-image {
+        width: 140px !important;
+    }
+    
     .oneclick-hero-title {
         font-size: 2.5rem;
     }
@@ -860,16 +952,47 @@
         width: 100%;
         margin: 0;
         border-radius: 0;
+        padding: 15px;
     }
     
-    .top-bar-info {
-        flex-direction: column;
-        gap: 8px;
+    .navbar-collapse {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: var(--oci-shadow-lg);
+        margin-top: 10px;
+    }
+    
+    .header-actions {
+        margin-top: 15px;
+        flex-direction: row;
+        justify-content: center;
     }
     
     .footer-social {
         justify-content: flex-start;
         margin-top: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .brand-logo-image {
+        width: 120px !important;
+    }
+    
+    .navbar-toggler {
+        padding: 4px 8px;
+        font-size: 1rem;
+    }
+    
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .oneclick-btn-signin, .oneclick-btn-primary {
+        width: 100%;
+        justify-content: center;
     }
 }
 
@@ -1144,4 +1267,99 @@
     .cta-buttons .btn {
         width: 100%;
     }
+}
+
+/* Popup Form */
+.oneclick-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.oneclick-popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.oneclick-popup-form {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.oneclick-popup-form.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.oneclick-popup-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--oci-gray);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.oneclick-popup-close:hover {
+    color: var(--oci-danger);
+}
+
+.oneclick-popup-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--oci-dark);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.oneclick-popup-form .form-group {
+    margin-bottom: 20px;
+}
+
+.oneclick-popup-form label {
+    font-weight: 600;
+    color: var(--oci-dark);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.oneclick-popup-form .form-control {
+    border: 2px solid var(--oci-border);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.oneclick-popup-form .form-control:focus {
+    border-color: var(--oci-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.oneclick-popup-form .btn {
+    width: 100%;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 16px;
 }

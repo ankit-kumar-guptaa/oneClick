@@ -24,7 +24,7 @@ require_once 'routes/web.php';
     <?php include 'includes/header.php'; ?>
 
     <!-- Page Header -->
-    <section class="oci-page-header">
+    <section class="oci-page-header bg-gradient-primary">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
@@ -33,8 +33,8 @@ require_once 'routes/web.php';
                         <span>/</span>
                         <span>About Us</span>
                     </nav>
-                    <h1 class="page-title">About OneClick Insurance</h1>
-                    <p class="page-subtitle">India's Most Trusted Insurance Comparison Platform</p>
+                    <h1 class="page-title text-white">About OneClick Insurance</h1>
+                    <p class="page-subtitle text-white opacity-75">India's Most Trusted Insurance Comparison Platform</p>
                 </div>
             </div>
         </div>
@@ -46,32 +46,38 @@ require_once 'routes/web.php';
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="about-content">
-                        <h2 class="about-title">Making Insurance <span class="text-primary">Simple & Affordable</span></h2>
-                        <p class="about-desc">
+                        <span class="oneclick-section-label">Our Story</span>
+                        <h2 class="about-title display-4 fw-bold mb-4">Making Insurance <span class="text-gradient">Simple & Affordable</span></h2>
+                        <p class="about-desc lead mb-4">
                             OneClick Insurance is India's leading digital insurance platform, helping millions 
                             of customers compare and buy the best insurance policies online. We believe insurance 
                             should be simple, transparent, and accessible to everyone.
                         </p>
-                        <div class="about-stats">
-                            <div class="stat-item">
-                                <h3>5M+</h3>
-                                <p>Happy Customers</p>
+                        <div class="about-stats d-flex flex-wrap gap-4 mt-5">
+                            <div class="stat-item text-center p-4 rounded-4 shadow-sm">
+                                <h3 class="display-5 fw-bold text-gradient mb-2">5M+</h3>
+                                <p class="mb-0 text-muted">Happy Customers</p>
                             </div>
-                            <div class="stat-item">
-                                <h3>50+</h3>
-                                <p>Insurance Partners</p>
+                            <div class="stat-item text-center p-4 rounded-4 shadow-sm">
+                                <h3 class="display-5 fw-bold text-gradient mb-2">50+</h3>
+                                <p class="mb-0 text-muted">Insurance Partners</p>
                             </div>
-                            <div class="stat-item">
-                                <h3>12M+</h3>
-                                <p>Policies Sold</p>
+                            <div class="stat-item text-center p-4 rounded-4 shadow-sm">
+                                <h3 class="display-5 fw-bold text-gradient mb-2">12M+</h3>
+                                <p class="mb-0 text-muted">Policies Sold</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="about-image">
+                    <div class="about-image position-relative">
+                        <div class="image-shape-bg"></div>
                         <img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=600&h=400&fit=crop" 
-                             alt="OneClick Insurance Team" class="img-fluid rounded-3">
+                             alt="OneClick Insurance Team" class="img-fluid rounded-lg shadow-lg position-relative">
+                        <div class="experience-badge">
+                            <span class="years">10+</span>
+                            <span class="text">Years of Excellence</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,21 +89,23 @@ require_once 'routes/web.php';
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center mb-5">
-                    <h2 class="section-title">Our Foundation</h2>
+                    <span class="oneclick-section-label">What Drives Us</span>
+                    <h2 class="oneclick-section-title">Our Foundation</h2>
+                    <p class="section-subtitle mx-auto">The core principles that guide everything we do at OneClick Insurance</p>
                 </div>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <div class="mvv-card">
-                        <div class="mvv-icon">
-                            <i class="fas fa-bullseye"></i>
+                    <div class="mvv-card h-100 p-4 rounded-4 shadow-sm border-top border-primary border-3 transition-hover">
+                        <div class="mvv-icon mb-4 rounded-circle bg-primary bg-opacity-10 p-3 d-inline-flex">
+                            <i class="fas fa-bullseye fa-2x text-primary"></i>
                         </div>
-                        <h4>Our Mission</h4>
-                        <p>To democratize insurance in India by making it simple, transparent, and accessible to every individual and family through technology-driven solutions.</p>
+                        <h4 class="mb-3 fw-bold">Our Mission</h4>
+                        <p class="text-muted">To democratize insurance in India by making it simple, transparent, and accessible to every individual and family through technology-driven solutions.</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="mvv-card">
+                    <div class="mvv-card h-100 p-4 rounded-4 shadow-sm border-top border-primary border-3 transition-hover">
                         <div class="mvv-icon">
                             <i class="fas fa-eye"></i>
                         </div>

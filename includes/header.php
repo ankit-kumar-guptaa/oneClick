@@ -100,17 +100,84 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown mega-dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                <i class="fas fa-home"></i>
+                                <i class="fas fa-chart-line"></i>
+                                Investment
+                            </a>
+                            <div class="dropdown-menu mega-menu">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h6 class="mega-menu-title">Investment Plans</h6>
+                                            <ul class="mega-menu-list">
+                                                <li><a href="#"><i class="fas fa-chart-line"></i> Mutual Funds</a></li>
+                                                <li><a href="#"><i class="fas fa-coins"></i> Fixed Deposits</a></li>
+                                                <li><a href="#"><i class="fas fa-piggy-bank"></i> Savings Plans</a></li>
+                                                <li><a href="#"><i class="fas fa-hand-holding-usd"></i> Retirement Plans</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 class="mega-menu-title">Insurance + Investment</h6>
+                                            <ul class="mega-menu-list">
+                                                <li><a href="#"><i class="fas fa-user-shield"></i> ULIP Plans</a></li>
+                                                <li><a href="#"><i class="fas fa-heartbeat"></i> Endowment Plans</a></li>
+                                                <li><a href="#"><i class="fas fa-baby"></i> Child Plans</a></li>
+                                                <li><a href="#"><i class="fas fa-umbrella"></i> Guaranteed Return Plans</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mega-menu-image">
+                                                <img src="assets/img/investment-banner.jpg" alt="Investment Plans" onerror="this.src='https://via.placeholder.com/300x200?text=Investment+Plans'">
+                                                <div class="mega-menu-cta">
+                                                    <h5>Grow your wealth</h5>
+                                                    <p>Secure your future with our investment plans</p>
+                                                    <a href="#" class="btn btn-sm btn-light">Explore Now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown mega-dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                <i class="fas fa-umbrella"></i>
                                 Other
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-home"></i> Home Insurance</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-plane"></i> Travel Insurance</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-user-shield"></i> Term Life Insurance</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-chart-line"></i> Investment Plans</a></li>
-                            </ul>
+                            <div class="dropdown-menu mega-menu">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h6 class="mega-menu-title">Property Insurance</h6>
+                                            <ul class="mega-menu-list">
+                                                <li><a href="#"><i class="fas fa-home"></i> Home Insurance</a></li>
+                                                <li><a href="#"><i class="fas fa-building"></i> Property Insurance</a></li>
+                                                <li><a href="#"><i class="fas fa-store"></i> Shop Insurance</a></li>
+                                                <li><a href="#"><i class="fas fa-industry"></i> Industrial Insurance</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 class="mega-menu-title">Travel & Life</h6>
+                                            <ul class="mega-menu-list">
+                                                <li><a href="#"><i class="fas fa-plane"></i> Travel Insurance</a></li>
+                                                <li><a href="#"><i class="fas fa-user-shield"></i> Term Life Insurance</a></li>
+                                                <li><a href="#"><i class="fas fa-graduation-cap"></i> Student Travel Insurance</a></li>
+                                                <li><a href="#"><i class="fas fa-briefcase"></i> Corporate Travel Plans</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 class="mega-menu-title">Specialized Coverage</h6>
+                                            <ul class="mega-menu-list">
+                                                <li><a href="#"><i class="fas fa-laptop"></i> Gadget Insurance</a></li>
+                                                <li><a href="#"><i class="fas fa-paw"></i> Pet Insurance</a></li>
+                                                <li><a href="#"><i class="fas fa-bicycle"></i> Cycle Insurance</a></li>
+                                                <li><a href="#"><i class="fas fa-ring"></i> Jewelry Insurance</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
@@ -121,10 +188,104 @@
                     </ul>
 
                     <div class="header-actions">
-                        <a href="#" class="btn oneclick-btn-signin me-2">
+                        <a href="#" class="btn oneclick-btn-signin me-2" id="signInBtn">
                             <i class="fas fa-user"></i>
                             Sign In
                         </a>
+                        
+                        <!-- Sign In Popup Form -->
+                        <div class="signin-popup" id="signInPopup">
+                            <div class="signin-popup-content">
+                                <div class="signin-popup-header">
+                                    <div class="signin-popup-icon">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <h3 class="signin-popup-title">Welcome Back!</h3>
+                                    <p class="signin-popup-subtitle">Sign in to access your insurance dashboard</p>
+                                    <button class="signin-popup-close" id="closeSignInPopup">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="signin-popup-body">
+                                <div class="signin-tabs">
+                                    <div class="signin-tab active" data-tab="phone">Phone</div>
+                                    <div class="signin-tab" data-tab="email">Email</div>
+                                </div>
+                                <div class="signin-tab-content active" data-tab="phone">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="signin-phone">Phone Number</label>
+                                            <div class="phone-input-group">
+                                                <select class="country-code">
+                                                    <option value="+91">+91</option>
+                                                </select>
+                                                <div class="input-with-icon">
+                                                    <i class="fas fa-mobile-alt"></i>
+                                                    <input type="tel" class="form-control" id="signin-phone" placeholder="Enter your phone number" required pattern="[6-9]\d{9}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="otp-section">
+                                            <div class="form-group">
+                                                <label for="otpCode">OTP Code</label>
+                                                <div class="otp-inputs">
+                                                    <input type="text" maxlength="1" class="otp-input" required>
+                                                    <input type="text" maxlength="1" class="otp-input" required>
+                                                    <input type="text" maxlength="1" class="otp-input" required>
+                                                    <input type="text" maxlength="1" class="otp-input" required>
+                                                    <input type="text" maxlength="1" class="otp-input" required>
+                                                    <input type="text" maxlength="1" class="otp-input" required>
+                                                </div>
+                                                <div class="resend-otp">
+                                                    <span id="otpTimer">Resend OTP in <span class="countdown">30</span>s</span>
+                                                    <button type="button" id="resendOtpBtn" disabled>Resend OTP</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn signin-btn" id="phoneSignInBtn">
+                                            <i class="fas fa-paper-plane"></i> Send OTP
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="signin-tab-content" data-tab="email">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="signin-email">Email Address</label>
+                                            <div class="input-with-icon">
+                                                <i class="fas fa-envelope"></i>
+                                                <input type="email" class="form-control" id="signin-email" placeholder="Enter your email" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="signin-password">Password</label>
+                                            <div class="password-input-group">
+                                                <div class="input-with-icon">
+                                                    <i class="fas fa-lock"></i>
+                                                    <input type="password" class="form-control" id="signin-password" placeholder="Enter your password" required>
+                                                </div>
+                                                <span class="toggle-password" id="passwordToggle">
+                                                    <i class="fas fa-eye"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-options">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                                <label class="form-check-label" for="rememberMe">Remember me</label>
+                                            </div>
+                                            <a href="#" class="forgot-password">Forgot Password?</a>
+                                        </div>
+                                        <button type="submit" class="btn signin-btn">
+                                            <i class="fas fa-sign-in-alt"></i> Sign In
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="signin-footer">
+                                    <p>Don't have an account? <a href="#" id="registerLink">Register Now</a></p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                         <button class="btn oneclick-btn-primary">
                             <i class="fas fa-search"></i>
                             Get Quote

@@ -41,10 +41,245 @@ const observeCards = () => {
     });
 };
 
+// Insurance Calculator Functions
+function setupCalculator() {
+    // Tab switching functionality
+    const tabBtns = document.querySelectorAll('.calc-tab-btn');
+    const tabContents = document.querySelectorAll('.calc-tab-content');
+    
+    if (tabBtns.length === 0) return; // Exit if calculator not on page
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabTarget = btn.dataset.tab;
+            
+            // Update active tab button
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Update active tab content
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === tabTarget + '-calc') {
+                    content.classList.add('active');
+                }
+            });
+            
+            // Hide result if shown
+            document.getElementById('premium-result').classList.remove('show');
+        });
+    });
+    
+    // Calculate premium for Health Insurance
+    const calculateHealthBtn = document.getElementById('calculate-health');
+    if (calculateHealthBtn) {
+        calculateHealthBtn.addEventListener('click', () => {
+            const age = document.getElementById('health-age').value;
+            const coverage = parseInt(document.getElementById('health-coverage').value);
+            const members = parseInt(document.getElementById('health-members').value);
+            const city = document.getElementById('health-city').value;
+            
+            // Simple calculation logic (can be enhanced with more complex formulas)
+            let basePremium = coverage * 0.02; // 2% of coverage amount as base
+            
+            // Age factor
+            let ageFactor = 1.0;
+            if (age === '18-25') ageFactor = 0.8;
+            else if (age === '26-35') ageFactor = 1.0;
+            else if (age === '36-45') ageFactor = 1.2;
+            else if (age === '46-55') ageFactor = 1.5;
+            else if (age === '56-65') ageFactor = 1.8;
+            else if (age === '65+') ageFactor = 2.2;
+            
+            // Members factor
+            let membersFactor = 1.0 + ((members - 1) * 0.5);
+            
+            // City tier factor
+            let cityFactor = 1.0;
+            if (city === 'tier1') cityFactor = 1.2;
+            else if (city === 'tier2') cityFactor = 1.0;
+            else if (city === 'tier3') cityFactor = 0.9;
+            
+            const premium = Math.round(basePremium * ageFactor * membersFactor * cityFactor);
+            showPremiumResult(premium);
+        });
+    }
+    
+    // Calculate premium for Car Insurance
+    const calculateCarBtn = document.getElementById('calculate-car');
+    if (calculateCarBtn) {
+        calculateCarBtn.addEventListener('click', () => {
+            const carAge = document.getElementById('car-age').value;
+            const carValue = document.getElementById('car-value').value;
+            const coverageType = document.getElementById('car-coverage').value;
+            const ncb = parseInt(document.getElementById('car-ncb').value);
+            
+            // Simple calculation logic
+            let value = 0;
+            if (carValue === '300000') value = 300000;
+            else if (carValue === '500000') value = 500000;
+            else if (carValue === '800000') value = 800000;
+            else if (carValue === '1200000') value = 1200000;
+            else if (carValue === '1500000+') value = 1500000;
+            
+            let basePremium = value * 0.03; // 3% of car value
+            
+            // Car age factor
+            let ageFactor = 1.0;
+            if (carAge === 'new') ageFactor = 1.0;
+            else if (carAge === '1-3') ageFactor = 1.1;
+            else if (carAge === '4-6') ageFactor = 1.3;
+            else if (carAge === '7-10') ageFactor = 1.5;
+            else if (carAge === '10+') ageFactor = 1.8;
+            
+            // Coverage type factor
+            let coverageFactor = 1.0;
+            if (coverageType === 'third-party') coverageFactor = 0.4;
+            else if (coverageType === 'comprehensive') coverageFactor = 1.0;
+            else if (coverageType === 'zero-dep') coverageFactor = 1.3;
+            
+            // NCB discount
+            let ncbDiscount = 1 - (ncb / 100);
+            
+            const premium = Math.round(basePremium * ageFactor * coverageFactor * ncbDiscount);
+            showPremiumResult(premium);
+        });
+    }
+    
+    // Calculate premium for Term Life Insurance
+    const calculateTermBtn = document.getElementById('calculate-term');
+    if (calculateTermBtn) {
+        calculateTermBtn.addEventListener('click', () => {
+            const age = document.getElementById('term-age').value;
+            const coverage = parseInt(document.getElementById('term-coverage').value);
+            const duration = parseInt(document.getElementById('term-duration').value);
+            const smoker = document.getElementById('term-smoker').value;
+            
+            // Simple calculation logic
+            let basePremium = coverage * 0.001; // 0.1% of coverage amount
+            
+            // Age factor
+            let ageFactor = 1.0;
+            if (age === '18-25') ageFactor = 0.8;
+            else if (age === '26-35') ageFactor = 1.0;
+            else if (age === '36-45') ageFactor = 1.5;
+            else if (age === '46-55') ageFactor = 2.2;
+            else if (age === '56-60') ageFactor = 3.0;
+            
+            // Duration factor
+            let durationFactor = 1.0 + (duration / 100);
+            
+            // Smoker factor
+            let smokerFactor = smoker === 'yes' ? 1.5 : 1.0;
+            
+            const premium = Math.round(basePremium * ageFactor * durationFactor * smokerFactor);
+            showPremiumResult(premium);
+        });
+    }
+    
+    // Get detailed quote button
+    const getDetailedQuoteBtn = document.getElementById('get-detailed-quote');
+    if (getDetailedQuoteBtn) {
+        getDetailedQuoteBtn.addEventListener('click', () => {
+            // Show notification
+            showNotification('Your detailed quote request has been submitted. Our team will contact you shortly!', 'success');
+            
+            // Hide calculator result
+            setTimeout(() => {
+                document.getElementById('premium-result').classList.remove('show');
+            }, 1000);
+        });
+    }
+}
+
+function showPremiumResult(amount) {
+    const resultElement = document.getElementById('premium-result');
+    const amountElement = document.getElementById('premium-amount');
+    
+    if (resultElement && amountElement) {
+        amountElement.textContent = amount.toLocaleString();
+        resultElement.classList.add('show');
+        
+        // Scroll to result
+        resultElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+}
+
 // Initialize animations when DOM is loaded
+// Auto-Appearing Form Functions
+function setupAutoAppearingForm() {
+    const autoPopupOverlay = document.getElementById('autoAppearingPopup');
+    const autoPopupForm = autoPopupOverlay?.querySelector('.oneclick-popup-form');
+    const closeAutoPopupBtn = document.getElementById('closeAutoPopup');
+    const specialOfferForm = document.getElementById('specialOfferForm');
+    
+    if (!autoPopupOverlay || !autoPopupForm) return;
+    
+    // Show popup after 6 seconds
+    const showAutoPopupTimeout = setTimeout(() => {
+        autoPopupOverlay.classList.add('active');
+        setTimeout(() => {
+            autoPopupForm.classList.add('active');
+        }, 300);
+    }, 6000);
+    
+    // Close popup
+    if (closeAutoPopupBtn) {
+        closeAutoPopupBtn.addEventListener('click', () => {
+            autoPopupForm.classList.remove('active');
+            setTimeout(() => {
+                autoPopupOverlay.classList.remove('active');
+            }, 300);
+        });
+    }
+    
+    // Close on outside click
+    autoPopupOverlay.addEventListener('click', (e) => {
+        if (e.target === autoPopupOverlay) {
+            autoPopupForm.classList.remove('active');
+            setTimeout(() => {
+                autoPopupOverlay.classList.remove('active');
+            }, 300);
+        }
+    });
+    
+    // Form submission
+    if (specialOfferForm) {
+        specialOfferForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = specialOfferForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission (replace with actual AJAX call)
+            setTimeout(() => {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+                
+                // Hide form
+                autoPopupForm.classList.remove('active');
+                setTimeout(() => {
+                    autoPopupOverlay.classList.remove('active');
+                    
+                    // Show success notification
+                    showNotification('Thank you! Your discount code has been sent to your email.', 'success');
+                }, 300);
+            }, 1500);
+        });
+    }
+}
+
+// DOMContentLoaded Event
 document.addEventListener('DOMContentLoaded', function() {
     observeCards();
     setupModernHeader();
+    setupSignInPopup();
+    setupPhoneCallbackPopup();
+    setupCalculator();
+    setupAutoAppearingForm();
     
     // Add loading animation
     document.body.style.opacity = '0';
@@ -52,6 +287,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.transition = 'opacity 0.5s ease';
         document.body.style.opacity = '1';
     }, 100);
+    
+    // Auto show phone callback popup after 5 seconds
+    setTimeout(() => {
+        const phonePopup = document.getElementById('phonePopup');
+        if (phonePopup) {
+            showPopup(phonePopup);
+        }
+    }, 5000);
 });
 
 // Modern Header scroll effect
@@ -249,77 +492,356 @@ const hideLoader = () => {
     }
 };
 
-// Popup Form Functionality
-const setupPopupForm = () => {
-    const popupOverlay = document.getElementById('phonePopup');
-    const closePopupBtn = document.getElementById('closePopup');
-    const callExpertBtns = document.querySelectorAll('.oneclick-btn-outline');
-    const phoneCallbackForm = document.getElementById('phoneCallbackForm');
-    const popupForm = document.querySelector('.oneclick-popup-form');
+// Show popup function
+function showPopup(popup) {
+    if (!popup) return;
     
-    if (!popupOverlay || !popupForm) return; // Exit if elements don't exist
+    document.body.classList.add('popup-open');
+    popup.classList.add('active');
     
-    // Open popup when Call Expert button is clicked
-    callExpertBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            popupOverlay.classList.add('active');
-            setTimeout(() => {
-                popupForm.classList.add('active');
-            }, 100);
-        });
-    });
+    // Add animation classes
+    setTimeout(() => {
+        const popupContent = popup.querySelector('.popup-content');
+        if (popupContent) {
+            popupContent.classList.add('popup-animated');
+        }
+    }, 10);
+}
+
+// Hide popup function
+function hidePopup(popup) {
+    if (!popup) return;
     
-    // Close popup when close button is clicked
-    if (closePopupBtn) {
-        closePopupBtn.addEventListener('click', () => {
-            popupForm.classList.remove('active');
-            setTimeout(() => {
-                popupOverlay.classList.remove('active');
-            }, 300);
-        });
+    const popupContent = popup.querySelector('.popup-content');
+    if (popupContent) {
+        popupContent.classList.remove('popup-animated');
     }
     
-    // Close popup when clicking outside the form
-    popupOverlay.addEventListener('click', (e) => {
-        if (e.target === popupOverlay) {
-            popupForm.classList.remove('active');
-            setTimeout(() => {
-                popupOverlay.classList.remove('active');
-            }, 300);
-        }
-    });
+    setTimeout(() => {
+        document.body.classList.remove('popup-open');
+        popup.classList.remove('active');
+    }, 300);
+}
+
+// Setup Sign In Popup
+function setupSignInPopup() {
+    const signInBtn = document.getElementById('signInBtn');
+    const signInPopup = document.getElementById('signInPopup');
+    const closeSignInPopupBtn = document.getElementById('closeSignInPopup');
+    const popupContent = signInPopup?.querySelector('.signin-popup-content');
     
-    // Handle form submission
-    if (phoneCallbackForm) {
-        phoneCallbackForm.addEventListener('submit', (e) => {
+    if (signInBtn && signInPopup) {
+        // Show popup when sign in button is clicked
+        signInBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            const phoneNumber = document.getElementById('phoneNumber').value;
+            document.body.classList.add('popup-open');
+            signInPopup.classList.add('active');
             
-            if (validatePhone(phoneNumber)) {
-                // Show success notification
-                showNotification('Thank you! We will call you back shortly.', 'success');
-                
-                // Close popup after submission
-                setTimeout(() => {
-                    popupForm.classList.remove('active');
-                    setTimeout(() => {
-                        popupOverlay.classList.remove('active');
-                    }, 300);
-                }, 1000);
-                
-                // Reset form
-                phoneCallbackForm.reset();
-            } else {
-                // Show error notification
-                showNotification('Please enter a valid phone number.', 'error');
+            // Add a small delay for the animation
+            setTimeout(() => {
+                if (popupContent) {
+                    popupContent.style.opacity = '1';
+                    popupContent.style.transform = 'translateY(0) scale(1)';
+                }
+            }, 50);
+        });
+        
+        // Close popup when close button is clicked
+        if (closeSignInPopupBtn) {
+            closeSignInPopupBtn.addEventListener('click', function() {
+                closeSignInPopupWithAnimation();
+            });
+        }
+        
+        // Close popup when clicking outside
+        signInPopup.addEventListener('click', function(e) {
+            if (e.target === signInPopup) {
+                closeSignInPopupWithAnimation();
             }
         });
+        
+        // Function to close popup with animation
+        function closeSignInPopupWithAnimation() {
+            if (popupContent) {
+                popupContent.style.opacity = '0';
+                popupContent.style.transform = 'translateY(30px) scale(0.95)';
+            }
+            
+            // Wait for animation to complete before removing active class
+            setTimeout(() => {
+                document.body.classList.remove('popup-open');
+                signInPopup.classList.remove('active');
+                
+                // Reset transform and opacity after popup is hidden
+                setTimeout(() => {
+                    if (popupContent) {
+                        popupContent.removeAttribute('style');
+                    }
+                }, 300);
+            }, 300);
+        }
+        
+        // Setup tabs
+        const tabs = signInPopup.querySelectorAll('.signin-tab');
+        const tabContents = signInPopup.querySelectorAll('.signin-tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to current tab
+                this.classList.add('active');
+                
+                // Hide all tab contents
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Show current tab content
+                const target = this.getAttribute('data-tab');
+                const targetContent = signInPopup.querySelector(`.signin-tab-content[data-tab="${target}"]`);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+        
+        // Setup password toggle
+        const passwordInput = document.getElementById('signin-password');
+        const passwordToggle = document.getElementById('passwordToggle');
+        if (passwordInput && passwordToggle) {
+            passwordToggle.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    this.innerHTML = '<i class="fas fa-eye-slash"></i>';
+                } else {
+                    passwordInput.type = 'password';
+                    this.innerHTML = '<i class="fas fa-eye"></i>';
+                }
+            });
+        }
+        
+        // Setup phone input formatting
+        const phoneInput = document.getElementById('signin-phone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function() {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 10) value = value.slice(0, 10);
+                this.value = value;
+            });
+        }
+        
+        // Setup form submission
+        const phoneForm = signInPopup.querySelector('.signin-tab-content[data-tab="phone"] form');
+        if (phoneForm) {
+            phoneForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Show OTP section
+                const otpSection = signInPopup.querySelector('.otp-section');
+                if (otpSection) {
+                    otpSection.classList.add('active');
+                    // Focus on first OTP input
+                    const firstOtpInput = otpSection.querySelector('.otp-input');
+                    if (firstOtpInput) firstOtpInput.focus();
+                }
+            });
+        }
+        
+        // Setup OTP input focus behavior
+        const otpInputs = document.querySelectorAll('.otp-input');
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', function() {
+                // Only allow numbers
+                this.value = this.value.replace(/[^0-9]/g, '');
+                
+                if (this.value.length >= 1) {
+                    this.value = this.value[0]; // Only allow one character
+                    
+                    // Add filled class for styling
+                    this.classList.add('filled');
+                    
+                    // Move to next input
+                    if (index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    } else {
+                        // Last input filled, check if all inputs are filled
+                        const allFilled = Array.from(otpInputs).every(input => input.value.length === 1);
+                        if (allFilled) {
+                            // All inputs filled, show success animation
+                            otpInputs.forEach(input => {
+                                input.style.borderColor = '#10b981'; // Success color
+                                input.style.backgroundColor = 'rgba(16, 185, 129, 0.1)'; // Light success background
+                            });
+                            
+                            // Change button text to indicate verification
+                            const verifyOtpBtn = document.querySelector('.signin-button');
+                            if (verifyOtpBtn) {
+                                verifyOtpBtn.innerHTML = '<i class="fas fa-check-circle"></i> Verify OTP';
+                                verifyOtpBtn.classList.add('verify-ready');
+                            }
+                        }
+                    }
+                } else {
+                    this.classList.remove('filled');
+                }
+            });
+            
+            // Handle backspace
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace') {
+                    if (!this.value && index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                    this.classList.remove('filled');
+                    this.style.borderColor = '';
+                    this.style.backgroundColor = '';
+                }
+            });
+            
+            // Handle paste event for OTP
+            input.addEventListener('paste', function(e) {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData('text');
+                const otpDigits = pasteData.replace(/[^0-9]/g, '').split('');
+                
+                // Fill inputs with pasted digits
+                otpInputs.forEach((input, i) => {
+                    if (i < otpDigits.length) {
+                        input.value = otpDigits[i];
+                        input.classList.add('filled');
+                    }
+                });
+                
+                // Focus on appropriate input after paste
+                if (otpDigits.length < otpInputs.length) {
+                    otpInputs[Math.min(otpDigits.length, otpInputs.length - 1)].focus();
+                } else {
+                    otpInputs[otpInputs.length - 1].focus();
+                }
+            });
+        });
+        
+        // Setup email form submission
+        const emailForm = signInPopup.querySelector('.signin-tab-content[data-tab="email"] form');
+        if (emailForm) {
+            emailForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Handle email login (can be expanded later)
+                showNotification('Login successful!', 'success');
+                hidePopup(signInPopup);
+            });
+        }
     }
+    
+    // Close popup when close button is clicked
+    closePopupBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const popup = this.closest('.popup-overlay');
+            if (popup) {
+                hidePopup(popup);
+            }
+        });
+    });
+    
+    // Close popup when clicking outside
+    document.addEventListener('click', function(e) {
+        const popups = document.querySelectorAll('.popup-overlay.active');
+        popups.forEach(popup => {
+            const popupContent = popup.querySelector('.popup-content');
+            if (popup.classList.contains('active') && popupContent && !popupContent.contains(e.target) && !e.target.closest('.popup-trigger')) {
+                hidePopup(popup);
+            }
+        });
+    });
+}
+
+// Setup Phone Callback Popup
+function setupPhoneCallbackPopup() {
+    const phonePopup = document.getElementById('phonePopup');
+    const closePopupBtns = document.querySelectorAll('.close-popup');
+    
+    if (phonePopup) {
+        // Close popup when close button is clicked
+        closePopupBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const popup = this.closest('.popup-overlay');
+                if (popup) {
+                    hidePopup(popup);
+                }
+            });
+        });
+        
+        // Setup phone input formatting
+        const phoneInput = document.getElementById('callbackPhoneInput');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function() {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 10) value = value.slice(0, 10);
+                
+                // Format as XXX-XXX-XXXX
+                if (value.length > 6) {
+                    this.value = `${value.slice(0, 3)}-${value.slice(3, 6)}-${value.slice(6)}`;
+                } else if (value.length > 3) {
+                    this.value = `${value.slice(0, 3)}-${value.slice(3)}`;
+                } else {
+                    this.value = value;
+                }
+            });
+        }
+        
+        // Form submission
+        const callbackForm = document.getElementById('callbackForm');
+        if (callbackForm) {
+            callbackForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const name = document.getElementById('callbackNameInput').value;
+                const phone = document.getElementById('callbackPhoneInput').value;
+                const email = document.getElementById('callbackEmailInput').value;
+                
+                // Validate form data
+                if (!name || !phone) {
+                    showNotification('Please fill in all required fields', 'error');
+                    return;
+                }
+                
+                // Show success message
+                showNotification('Thank you! We will call you back shortly.', 'success');
+                
+                // Hide popup after success
+                setTimeout(() => {
+                    hidePopup(phonePopup);
+                    callbackForm.reset();
+                }, 2000);
+                
+                // Here you would normally send the data to the server
+                console.log('Callback request:', { name, phone, email });
+            });
+        }
+    }
+};
+
+// Legacy Popup Form Functionality - Keeping for backward compatibility
+const setupPopupForm = () => {
+    // This function is now deprecated, using setupPhoneCallbackPopup instead
+    console.log('Using legacy popup form setup');
 };
 
 // Initialize popup form when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    setupPopupForm();
+    observeCards();
+    setupModernHeader();
+    setupSignInPopup();
+    setupPhoneCallbackPopup();
+    setupCalculator();
+    setupAutoAppearingForm();
+    
+    // Add loading animation
+    document.body.style.opacity = '0';
+    setTimeout(() => {
+        document.body.style.transition = 'opacity 0.5s ease';
+        document.body.style.opacity = '1';
+    }, 100);
 });
 
 // Export functions for use in other files

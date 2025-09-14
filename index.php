@@ -28,60 +28,25 @@ require_once 'routes/web.php';
     <!-- Home Page Content -->
     <main class="oneclick-main-content">
        <!-- Hero Section with Image Slider -->
-    <section class="oneclick-hero-section">
+    <section class="oneclick-hero-section bg-white">
     <div class="container">
-        <div class="row align-items-center min-vh-85">
+        <div class="row align-items-center min-vh-50">
             <div class="col-lg-6">
                 <div class="oneclick-hero-content">
                     <div class="oneclick-hero-badge">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>India's Most Trusted Insurance Platform</span>
+                        <i class="fas fa-award"></i>
+                        <span>India's #1 Insurance Platform</span>
                     </div>
                     <h1 class="oneclick-hero-title">
-                        Get the <span class="oneclick-text-gradient">Best Insurance</span><br>
-                        Insurance Hai Zaroori !
+                        Secure Your Future <span class="oneclick-text-gradient">In One Click</span>
                     </h1>
                     <p class="oneclick-hero-subtitle">
-                        Compare 50+ insurance companies and save up to 85% on premiums. 
-                        Quick, easy, and completely secure process.
+                        Instant quotes, zero paperwork, and premium savings up to 85%
                     </p>
-                    <div class="oneclick-hero-features">
-                        <div class="oneclick-feature-item">
-                            <div class="oneclick-feature-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="oneclick-feature-text">
-                                <span class="feature-number">50+</span>
-                                <span class="feature-label">Insurance Partners</span>
-                            </div>
-                        </div>
-                        <div class="oneclick-feature-item">
-                            <div class="oneclick-feature-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="oneclick-feature-text">
-                                <span class="feature-number">2 Min</span>
-                                <span class="feature-label">Quick Process</span>
-                            </div>
-                        </div>
-                        <div class="oneclick-feature-item">
-                            <div class="oneclick-feature-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="oneclick-feature-text">
-                                <span class="feature-number">5M+</span>
-                                <span class="feature-label">Happy Customers</span>
-                            </div>
-                        </div>
-                    </div>
                     <div class="oneclick-hero-actions">
-                        <button class="oneclick-btn-primary oneclick-btn-large">
-                            <i class="fas fa-search"></i>
-                            Get Free Quote
-                        </button>
-                        <button class="oneclick-btn-outline oneclick-btn-large">
-                            <i class="fas fa-phone"></i>
-                            Call Expert
+                        <button class="oneclick-btn-primary oneclick-btn-large pulse-btn">
+                            <i class="fas fa-bolt"></i>
+                            Get Instant Quote
                         </button>
                     </div>
                 </div>
@@ -96,8 +61,7 @@ require_once 'routes/web.php';
                                     <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=350&fit=crop" alt="Car Insurance">
                                     <div class="slider-overlay">
                                         <h4>Car Insurance</h4>
-                                        <p>Starting from ₹2,999/year</p>
-                                        <span class="slider-badge">Up to 85% Off</span>
+                                        <p>Save up to ₹5,000 yearly</p>
                                     </div>
                                 </div>
                             </div>
@@ -106,8 +70,7 @@ require_once 'routes/web.php';
                                     <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=350&fit=crop" alt="Health Insurance">
                                     <div class="slider-overlay">
                                         <h4>Health Insurance</h4>
-                                        <p>Starting from ₹199/month</p>
-                                        <span class="slider-badge">Free Health Checkup</span>
+                                        <p>Coverage from ₹5 lakhs</p>
                                     </div>
                                 </div>
                             </div>
@@ -116,8 +79,7 @@ require_once 'routes/web.php';
                                     <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&h=350&fit=crop" alt="Home Insurance">
                                     <div class="slider-overlay">
                                         <h4>Home Insurance</h4>
-                                        <p>Complete Protection</p>
-                                        <span class="slider-badge">Instant Coverage</span>
+                                        <p>100% Claim Support</p>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +96,7 @@ require_once 'routes/web.php';
 
 
         <!-- Quick Quote Section -->
-        <section class="oneclick-quote-section py-5">
+        <!-- <section class="oneclick-quote-section py-5">
             <div class="container">
                 <div class="oneclick-quote-card">
                     <h3 class="quote-title">Get Instant Quote</h3>
@@ -175,7 +137,7 @@ require_once 'routes/web.php';
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
        <!-- Insurance Products Section - Clickable Cards -->
 <section class="oneclick-products-section py-5">
@@ -437,6 +399,210 @@ require_once 'routes/web.php';
             </div>
         </section>
 
+        <!-- Insurance Calculator Section -->
+        <section class="oneclick-calculator-section py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center mb-4">
+                        <span class="oneclick-section-label">Premium Calculator</span>
+                        <h2 class="oneclick-section-title">Calculate Your Insurance Premium</h2>
+                        <p class="oneclick-section-desc">Get an instant estimate of your insurance premium based on your requirements</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="calculator-container">
+                            <div class="calculator-tabs">
+                                <button class="calc-tab-btn active" data-tab="health">Health Insurance</button>
+                                <button class="calc-tab-btn" data-tab="car">Car Insurance</button>
+                                <button class="calc-tab-btn" data-tab="term">Term Life</button>
+                            </div>
+                            
+                            <div class="calculator-content">
+                                <!-- Health Insurance Calculator -->
+                                <div class="calc-tab-content active" id="health-calc">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Age</label>
+                                                <select class="form-select" id="health-age">
+                                                    <option value="18-25">18-25 years</option>
+                                                    <option value="26-35">26-35 years</option>
+                                                    <option value="36-45">36-45 years</option>
+                                                    <option value="46-55">46-55 years</option>
+                                                    <option value="56-65">56-65 years</option>
+                                                    <option value="65+">Above 65 years</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Coverage Amount</label>
+                                                <select class="form-select" id="health-coverage">
+                                                    <option value="300000">₹3 Lakhs</option>
+                                                    <option value="500000">₹5 Lakhs</option>
+                                                    <option value="1000000" selected>₹10 Lakhs</option>
+                                                    <option value="2000000">₹20 Lakhs</option>
+                                                    <option value="5000000">₹50 Lakhs</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Members to be Covered</label>
+                                                <select class="form-select" id="health-members">
+                                                    <option value="1">Self Only</option>
+                                                    <option value="2">Self + Spouse</option>
+                                                    <option value="3">Self + Spouse + 1 Child</option>
+                                                    <option value="4">Self + Spouse + 2 Children</option>
+                                                    <option value="5">Self + Spouse + Parents</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>City Tier</label>
+                                                <select class="form-select" id="health-city">
+                                                    <option value="tier1">Tier 1 (Metro Cities)</option>
+                                                    <option value="tier2">Tier 2 (Other Cities)</option>
+                                                    <option value="tier3">Tier 3 (Small Towns)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center mt-3">
+                                            <button class="oneclick-btn-primary" id="calculate-health">Calculate Premium</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Car Insurance Calculator -->
+                                <div class="calc-tab-content" id="car-calc">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Car Age</label>
+                                                <select class="form-select" id="car-age">
+                                                    <option value="new">Brand New</option>
+                                                    <option value="1-3">1-3 years</option>
+                                                    <option value="4-6">4-6 years</option>
+                                                    <option value="7-10">7-10 years</option>
+                                                    <option value="10+">Above 10 years</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Car Value (IDV)</label>
+                                                <select class="form-select" id="car-value">
+                                                    <option value="300000">Up to ₹3 Lakhs</option>
+                                                    <option value="500000">₹3-5 Lakhs</option>
+                                                    <option value="800000">₹5-8 Lakhs</option>
+                                                    <option value="1200000">₹8-12 Lakhs</option>
+                                                    <option value="1500000+">Above ₹15 Lakhs</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Coverage Type</label>
+                                                <select class="form-select" id="car-coverage">
+                                                    <option value="third-party">Third Party Only</option>
+                                                    <option value="comprehensive">Comprehensive Cover</option>
+                                                    <option value="zero-dep">Zero Depreciation</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>No Claim Bonus</label>
+                                                <select class="form-select" id="car-ncb">
+                                                    <option value="0">0% (No NCB)</option>
+                                                    <option value="20">20% (After 1 claim-free year)</option>
+                                                    <option value="25">25% (After 2 claim-free years)</option>
+                                                    <option value="35">35% (After 3 claim-free years)</option>
+                                                    <option value="45">45% (After 4 claim-free years)</option>
+                                                    <option value="50">50% (After 5 claim-free years)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center mt-3">
+                                            <button class="oneclick-btn-primary" id="calculate-car">Calculate Premium</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Term Life Calculator -->
+                                <div class="calc-tab-content" id="term-calc">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Age</label>
+                                                <select class="form-select" id="term-age">
+                                                    <option value="18-25">18-25 years</option>
+                                                    <option value="26-35">26-35 years</option>
+                                                    <option value="36-45">36-45 years</option>
+                                                    <option value="46-55">46-55 years</option>
+                                                    <option value="56-60">56-60 years</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Coverage Amount</label>
+                                                <select class="form-select" id="term-coverage">
+                                                    <option value="1000000">₹10 Lakhs</option>
+                                                    <option value="2500000">₹25 Lakhs</option>
+                                                    <option value="5000000">₹50 Lakhs</option>
+                                                    <option value="10000000">₹1 Crore</option>
+                                                    <option value="20000000">₹2 Crores</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Policy Term</label>
+                                                <select class="form-select" id="term-duration">
+                                                    <option value="10">10 years</option>
+                                                    <option value="15">15 years</option>
+                                                    <option value="20">20 years</option>
+                                                    <option value="25">25 years</option>
+                                                    <option value="30">30 years</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Smoker Status</label>
+                                                <select class="form-select" id="term-smoker">
+                                                    <option value="no">Non-Smoker</option>
+                                                    <option value="yes">Smoker</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center mt-3">
+                                            <button class="oneclick-btn-primary" id="calculate-term">Calculate Premium</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Result Display -->
+                                <div class="calculator-result" id="premium-result">
+                                    <div class="result-content">
+                                        <h4>Estimated Premium</h4>
+                                        <div class="premium-amount">₹<span id="premium-amount">0</span><span class="premium-period">/year</span></div>
+                                        <p class="result-note">This is an estimate. Actual premium may vary based on detailed assessment.</p>
+                                        <button class="oneclick-btn-primary mt-3" id="get-detailed-quote">
+                                            <i class="fas fa-file-invoice"></i> Get Detailed Quote
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <!-- Stats Section -->
         <section class="oneclick-stats-section py-5">
             <div class="container">
@@ -611,6 +777,44 @@ require_once 'routes/web.php';
                 <button type="submit" class="btn oneclick-btn-primary">
                     <i class="fas fa-phone"></i> Request Call Back
                 </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Auto-Appearing Form Popup -->
+    <div class="oneclick-popup-overlay" id="autoAppearingPopup">
+        <div class="oneclick-popup-form auto-form">
+            <button class="oneclick-popup-close" id="closeAutoPopup">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="popup-header">
+                <div class="popup-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <h3 class="oneclick-popup-title">Get 15% Off Your First Policy!</h3>
+                <p class="popup-subtitle">Limited time offer - Sign up now to claim your discount</p>
+            </div>
+            <form id="specialOfferForm">
+                <div class="form-group">
+                    <label for="offerName">Your Name</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" class="form-control" id="offerName" placeholder="Enter your full name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="offerPhone">Phone Number</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-phone-alt"></i>
+                        <input type="tel" class="form-control" id="offerPhone" placeholder="Enter your phone number" required pattern="[6-9]\d{9}">
+                    </div>
+                </div>
+                <button type="submit" class="oneclick-btn-primary pulse-btn">
+                    <i class="fas fa-lock"></i> Claim My 15% Discount
+                </button>
+                <div class="form-disclaimer">
+                    <small>By submitting this form, you agree to our <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></small>
+                </div>
             </form>
         </div>
     </div>

@@ -142,15 +142,15 @@ require_once 'routes/web.php';
        <!-- Insurance Products Section - Clickable Cards -->
 <section class="oneclick-products-section py-5">
     <div class="container">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-12 text-center mb-5">
                 <h2 class="products-main-title">Insurance Products</h2>
             </div>
-        </div>
+        </div> -->
         
         <div class="row g-3">
             <!-- Term Life Insurance -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="term-life-insurance.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">Lowest Price</div>
@@ -163,7 +163,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Health Insurance -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="health-insurance.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">FREE Home Visit</div>
@@ -176,7 +176,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Investment Plans -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="investment-plans.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">Life Cover</div>
@@ -189,7 +189,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Car Insurance -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="car-insurance.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge blue-badge">91% Discount</div>
@@ -202,7 +202,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Bike Insurance -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="bike-insurance.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge blue-badge">85% Discount</div>
@@ -215,7 +215,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Family Health -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="family-health-insurance.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">25% Discount</div>
@@ -228,7 +228,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Travel Insurance -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="travel-insurance.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-icon-box blue-icon">
@@ -240,7 +240,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Term Women -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="term-insurance-women.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">20% Cheaper</div>
@@ -253,7 +253,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Return Premium -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="return-premium-plans.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-icon-box teal-icon">
@@ -265,7 +265,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Guaranteed Returns -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="guaranteed-return-plans.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-icon-box gold-icon">
@@ -277,7 +277,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Child Plans -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="child-savings-plans.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge pink-badge">Premium Waiver</div>
@@ -290,7 +290,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Retirement -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="retirement-plans.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-icon-box indigo-icon">
@@ -302,7 +302,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Group Health -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="group-health-insurance.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">65% Discount</div>
@@ -315,7 +315,7 @@ require_once 'routes/web.php';
             </div>
             
             <!-- Home Insurance -->
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-lg-2 col-md-4 col-6">
                 <a href="home-insurance.php" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">25% Discount</div>
@@ -796,17 +796,17 @@ require_once 'routes/web.php';
             </div>
             <form id="specialOfferForm">
                 <div class="form-group">
-                    <label for="offerName">Your Name</label>
+                    <label for="specialOfferName">Your Name</label>
                     <div class="input-with-icon">
                         <i class="fas fa-user"></i>
-                        <input type="text" class="form-control" id="offerName" placeholder="Enter your full name" required>
+                        <input type="text" class="form-control" id="specialOfferName" placeholder="Enter your full name" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="offerPhone">Phone Number</label>
+                    <label for="specialOfferPhone">Phone Number</label>
                     <div class="input-with-icon">
                         <i class="fas fa-phone-alt"></i>
-                        <input type="tel" class="form-control" id="offerPhone" placeholder="Enter your phone number" required pattern="[6-9]\d{9}">
+                        <input type="tel" class="form-control" id="specialOfferPhone" placeholder="Enter your 10-digit mobile number" required pattern="[6-9]\d{9}">
                     </div>
                 </div>
                 <button type="submit" class="oneclick-btn-primary pulse-btn">

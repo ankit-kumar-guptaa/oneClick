@@ -1,4 +1,4 @@
-    <!-- Newsletter Section -->
+<!-- Newsletter Section -->
     <section class="oneclick-newsletter-section">
         <div class="container">
             <div class="row align-items-center">
@@ -34,7 +34,7 @@
                             <div class="brand-logo mb-3">
                                
                                 <div class="logo-text">
-                                    <img src="assets/img/dark-logo.png" style="width: 200px;" alt="OneClick Insurance" class="brand-logo-image"> 
+                                    <img src="assets/img/dark-logo.png" style="width: 200px;" alt="OneClick Insurance" class="brand-logo-image" > 
                                 </div>
                             </div>
                             <p class="footer-desc">
@@ -42,8 +42,10 @@
                                 Compare, choose, and buy insurance online with complete confidence.
                             </p>
                             <div class="footer-certifications">
-                                <img src="https://www.presentations.gov.in/wp-content/uploads/2020/10/IRDA_Preview-01.jpg" alt="IRDAI" class="cert-badge">
-                                <img src="https://via.placeholder.com/100x40/10b981/ffffff?text=ISO" alt="ISO" class="cert-badge">
+                                <img src="https://www.presentations.gov.in/wp-content/uploads/2020/10/IRDA_Preview-01.jpg" style="
+    width: 70px;
+" alt="IRDAI" class="cert-badge">
+                                <img src="assets/img/iso-badge.svg" alt="ISO" class="cert-badge">
                             </div>
                         </div>
                     </div>

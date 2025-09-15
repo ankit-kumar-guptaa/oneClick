@@ -128,7 +128,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="mega-menu-image">
-                                                <img src="assets/img/investment-banner.jpg" alt="Investment Plans" onerror="this.src='https://via.placeholder.com/300x200?text=Investment+Plans'">
+                                                <img src="assets/img/investment-banner.jpg" alt="Investment Plans" onerror="this.src='assets/img/fallback-image.svg'">
                                                 <div class="mega-menu-cta">
                                                     <h5>Grow your wealth</h5>
                                                     <p>Secure your future with our investment plans</p>
@@ -201,31 +201,26 @@
                                         <i class="fas fa-shield-alt"></i>
                                     </div>
                                     <h3 class="signin-popup-title">Welcome Back!</h3>
-                                    <p class="signin-popup-subtitle">Sign in to access your insurance dashboard</p>
+                                    <p class="signin-popup-subtitle">Sign in or register with your mobile number</p>
                                     <button class="signin-popup-close" id="closeSignInPopup">
                                         <i class="fas fa-times"></i>
                                     </button>
                                 </div>
                                 <div class="signin-popup-body">
-                                <div class="signin-tabs">
-                                    <div class="signin-tab active" data-tab="phone">Phone</div>
-                                    <div class="signin-tab" data-tab="email">Email</div>
-                                </div>
-                                <div class="signin-tab-content active" data-tab="phone">
-                                    <form>
+                                    <form id="mobileAuthForm">
                                         <div class="form-group">
-                                            <label for="signin-phone">Phone Number</label>
+                                            <label for="signin-phone">Mobile Number</label>
                                             <div class="phone-input-group">
                                                 <select class="country-code">
                                                     <option value="+91">+91</option>
                                                 </select>
                                                 <div class="input-with-icon">
                                                     <i class="fas fa-mobile-alt"></i>
-                                                    <input type="tel" class="form-control" id="signin-phone" placeholder="Enter your phone number" required pattern="[6-9]\d{9}">
+                                                    <input type="tel" class="form-control" id="signin-phone" placeholder="Enter your mobile number" required pattern="[6-9]\d{9}">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="otp-section">
+                                        <div class="otp-section" style="display: none;">
                                             <div class="form-group">
                                                 <label for="otpCode">OTP Code</label>
                                                 <div class="otp-inputs">
@@ -245,45 +240,11 @@
                                         <button type="submit" class="btn signin-btn" id="phoneSignInBtn">
                                             <i class="fas fa-paper-plane"></i> Send OTP
                                         </button>
+                                        <div class="form-disclaimer">
+                                            <small>By continuing, you agree to our <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></small>
+                                        </div>
                                     </form>
                                 </div>
-                                <div class="signin-tab-content" data-tab="email">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="signin-email">Email Address</label>
-                                            <div class="input-with-icon">
-                                                <i class="fas fa-envelope"></i>
-                                                <input type="email" class="form-control" id="signin-email" placeholder="Enter your email" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="signin-password">Password</label>
-                                            <div class="password-input-group">
-                                                <div class="input-with-icon">
-                                                    <i class="fas fa-lock"></i>
-                                                    <input type="password" class="form-control" id="signin-password" placeholder="Enter your password" required>
-                                                </div>
-                                                <span class="toggle-password" id="passwordToggle">
-                                                    <i class="fas fa-eye"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-options">
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="rememberMe">
-                                                <label class="form-check-label" for="rememberMe">Remember me</label>
-                                            </div>
-                                            <a href="#" class="forgot-password">Forgot Password?</a>
-                                        </div>
-                                        <button type="submit" class="btn signin-btn">
-                                            <i class="fas fa-sign-in-alt"></i> Sign In
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="signin-footer">
-                                    <p>Don't have an account? <a href="#" id="registerLink">Register Now</a></p>
-                                </div>
-                            </div>
                             </div>
                         </div>
                         <button class="btn oneclick-btn-primary">

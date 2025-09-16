@@ -750,6 +750,13 @@ require_once 'routes/web.php';
                 </div>
             </div>
         </section>
+
+
+        <section class="partners">
+            <div class="col-lg-12">
+                <img src="assets/img/all-partner-logo.avif" alt="">
+            </div>
+        </section>
     </main>
 
     <?php include 'includes/footer.php'; ?>

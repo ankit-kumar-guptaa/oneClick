@@ -2032,11 +2032,114 @@ require_once 'routes/web.php';
 
         <!-- Customer Testimonials -->
         <section class="oneclick-testimonials-section py-5 bg-light">
+            <style>
+                .oneclick-testimonials-section {
+                    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+                    padding: 80px 0;
+                    position: relative;
+                    overflow: hidden;
+                }
+                
+                .testimonial-card {
+                    background: #fff;
+                    border-radius: 12px;
+                    padding: 30px;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+                    margin: 20px 0;
+                    position: relative;
+                    transition: all 0.3s ease;
+                    border-top: 4px solid #4e73df;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                }
+                
+                .testimonial-card:hover {
+                    transform: translateY(-10px);
+                    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+                }
+                
+                .testimonial-stars {
+                    color: #ffc107;
+                    margin-bottom: 15px;
+                    font-size: 18px;
+                }
+                
+                .testimonial-text {
+                    font-size: 16px;
+                    line-height: 1.7;
+                    color: #495057;
+                    margin-bottom: 20px;
+                    flex-grow: 1;
+                    position: relative;
+                    font-style: italic;
+                }
+                
+                .testimonial-text:before {
+                    content: '\201C';
+                    font-size: 60px;
+                    position: absolute;
+                    left: -15px;
+                    top: -20px;
+                    color: rgba(78, 115, 223, 0.1);
+                    font-family: Georgia, serif;
+                }
+                
+                .testimonial-author {
+                    display: flex;
+                    align-items: center;
+                    border-top: 1px solid #e9ecef;
+                    padding-top: 15px;
+                }
+                
+                .author-info {
+                    display: flex;
+                    flex-direction: column;
+                }
+                
+                .author-name {
+                    font-weight: 600;
+                    color: #212529;
+                    font-size: 16px;
+                }
+                
+                .author-location {
+                    color: #6c757d;
+                    font-size: 14px;
+                }
+                
+                .swiper-pagination-bullet-active {
+                    background: #4e73df;
+                }
+                
+                .swiper-button-next, .swiper-button-prev {
+                    color: #4e73df;
+                    background: white;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                }
+                
+                .swiper-button-next:after, .swiper-button-prev:after {
+                    font-size: 18px;
+                }
+                
+                @media (max-width: 768px) {
+                    .testimonial-card {
+                        padding: 20px;
+                    }
+                    
+                    .swiper-button-next, .swiper-button-prev {
+                        display: none;
+                    }
+                }
+            </style>
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center mb-5">
-                        <span class="oneclick-section-label">Testimonials</span>
-                        <h2 class="oneclick-section-title">What Our Customers Say</h2>
+                        <span class="oneclick-section-label wow fadeIn">Testimonials</span>
+                        <h2 class="oneclick-section-title wow fadeInUp">What Our Customers Say</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -2057,8 +2160,6 @@ require_once 'routes/web.php';
                                             Great prices and excellent customer service. Highly recommended!"
                                         </p>
                                         <div class="testimonial-author">
-                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" 
-                                                 alt="Customer" class="author-image">
                                             <div class="author-info">
                                                 <strong class="author-name">Rohit Sharma</strong>
                                                 <span class="author-location">Mumbai, Maharashtra</span>
@@ -2080,8 +2181,6 @@ require_once 'routes/web.php';
                                             The comparison tool is amazing and support team is very helpful."
                                         </p>
                                         <div class="testimonial-author">
-                                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&h=80&fit=crop&crop=face" 
-                                                 alt="Customer" class="author-image">
                                             <div class="author-info">
                                                 <strong class="author-name">Priya Singh</strong>
                                                 <span class="author-location">Delhi, NCR</span>
@@ -2103,8 +2202,6 @@ require_once 'routes/web.php';
                                             OneClick Insurance truly lives up to its promises."
                                         </p>
                                         <div class="testimonial-author">
-                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" 
-                                                 alt="Customer" class="author-image">
                                             <div class="author-info">
                                                 <strong class="author-name">Arjun Kumar</strong>
                                                 <span class="author-location">Bangalore, Karnataka</span>
@@ -2112,8 +2209,73 @@ require_once 'routes/web.php';
                                         </div>
                                     </div>
                                 </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card">
+                                        <div class="testimonial-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <p class="testimonial-text">
+                                            "The term life insurance policy I got through OneClick saved me thousands compared to other options. 
+                                            The process was transparent and straightforward."
+                                        </p>
+                                        <div class="testimonial-author">
+                                            <div class="author-info">
+                                                <strong class="author-name">Vikram Patel</strong>
+                                                <span class="author-location">Ahmedabad, Gujarat</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card">
+                                        <div class="testimonial-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <p class="testimonial-text">
+                                            "As a first-time car owner, I was confused about insurance options. OneClick guided me through 
+                                            the entire process and found me the perfect coverage at an affordable rate."
+                                        </p>
+                                        <div class="testimonial-author">
+                                            <div class="author-info">
+                                                <strong class="author-name">Neha Gupta</strong>
+                                                <span class="author-location">Pune, Maharashtra</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card">
+                                        <div class="testimonial-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <p class="testimonial-text">
+                                            "I had to file a claim after a minor accident, and I was amazed at how quickly OneClick processed everything. 
+                                            The settlement was fair and fast - exactly what you need during stressful times."
+                                        </p>
+                                        <div class="testimonial-author">
+                                            <div class="author-info">
+                                                <strong class="author-name">Rajesh Khanna</strong>
+                                                <span class="author-location">Chennai, Tamil Nadu</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="swiper-pagination"></div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
                         </div>
                     </div>
                 </div>
@@ -2140,6 +2302,40 @@ require_once 'routes/web.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <!-- Testimonial Swiper JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new Swiper('.testimonialsSwiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    },
+                },
+            });
+        });
+    </script>
+    
     <!-- Custom JS -->
     <script src="assets/js/script.js"></script>
     <!-- Phone Number Popup Form -->

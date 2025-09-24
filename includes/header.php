@@ -194,59 +194,7 @@
                         </a>
                         
                         <!-- Sign In Popup Form -->
-                        <div class="signin-popup" id="signInPopup">
-                            <div class="signin-popup-content">
-                                <div class="signin-popup-header">
-                                    <div class="signin-popup-icon">
-                                        <i class="fas fa-shield-alt"></i>
-                                    </div>
-                                    <h3 class="signin-popup-title">Welcome Back!</h3>
-                                    <p class="signin-popup-subtitle">Sign in or register with your mobile number</p>
-                                    <button class="signin-popup-close" id="closeSignInPopup">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                                <div class="signin-popup-body">
-                                    <form id="mobileAuthForm">
-                                        <div class="form-group">
-                                            <label for="signin-phone">Mobile Number</label>
-                                            <div class="phone-input-group">
-                                                <select class="country-code">
-                                                    <option value="+91">+91</option>
-                                                </select>
-                                                <div class="input-with-icon">
-                                                    <i class="fas fa-mobile-alt"></i>
-                                                    <input type="tel" class="form-control" id="signin-phone" placeholder="Enter your mobile number" required pattern="[6-9]\d{9}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="otp-section" style="display: none;">
-                                            <div class="form-group">
-                                                <label for="otpCode">OTP Code</label>
-                                                <div class="otp-inputs">
-                                                    <input type="text" maxlength="1" class="otp-input" required>
-                                                    <input type="text" maxlength="1" class="otp-input" required>
-                                                    <input type="text" maxlength="1" class="otp-input" required>
-                                                    <input type="text" maxlength="1" class="otp-input" required>
-                                                    <input type="text" maxlength="1" class="otp-input" required>
-                                                    <input type="text" maxlength="1" class="otp-input" required>
-                                                </div>
-                                                <div class="resend-otp">
-                                                    <span id="otpTimer">Resend OTP in <span class="countdown">30</span>s</span>
-                                                    <button type="button" id="resendOtpBtn" disabled>Resend OTP</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn signin-btn" id="phoneSignInBtn">
-                                            <i class="fas fa-paper-plane"></i> Send OTP
-                                        </button>
-                                        <div class="form-disclaimer">
-                                            <small>By continuing, you agree to our <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></small>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+
                         <button class="btn oneclick-btn-primary">
                             <i class="fas fa-search"></i>
                             Get Quote

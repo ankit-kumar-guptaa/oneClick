@@ -2338,63 +2338,6 @@ require_once 'routes/web.php';
     
     <!-- Custom JS -->
     <script src="assets/js/script.js"></script>
-    <!-- Phone Number Popup Form -->
-    <div class="oneclick-popup-overlay" id="phonePopup">
-        <div class="oneclick-popup-form">
-            <button class="oneclick-popup-close" id="closePopup">&times;</button>
-            <h3 class="oneclick-popup-title">Get a Call Back</h3>
-            <form id="phoneCallbackForm">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Your Phone Number</label>
-                    <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter your phone number" required>
-                </div>
-                <button type="submit" class="btn oneclick-btn-primary">
-                    <i class="fas fa-phone"></i> Request Call Back
-                </button>
-            </form>
-        </div>
-    </div>
-    
-    <!-- Auto-Appearing Form Popup -->
-    <div class="oneclick-popup-overlay" id="autoAppearingPopup">
-        <div class="oneclick-popup-form auto-form">
-            <button class="oneclick-popup-close" id="closeAutoPopup">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="popup-header">
-                <div class="popup-icon">
-                    <i class="fas fa-gift"></i>
-                </div>
-                <h3 class="oneclick-popup-title">Get 15% Off Your First Policy!</h3>
-                <p class="popup-subtitle">Limited time offer - Sign up now to claim your discount</p>
-            </div>
-            <form id="specialOfferForm">
-                <div class="form-group">
-                    <label for="specialOfferName">Your Name</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-user"></i>
-                        <input type="text" class="form-control" id="specialOfferName" placeholder="Enter your full name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="specialOfferPhone">Phone Number</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-phone-alt"></i>
-                        <input type="tel" class="form-control" id="specialOfferPhone" placeholder="Enter your 10-digit mobile number" required pattern="[6-9]\d{9}">
-                    </div>
-                </div>
-                <button type="submit" class="oneclick-btn-primary pulse-btn">
-                    <i class="fas fa-lock"></i> Claim My 15% Discount
-                </button>
-                <div class="form-disclaimer">
-                    <small>By submitting this form, you agree to our <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></small>
-                </div>
-            </form>
-        </div>
-    </div>
+
 </body>
 </html>

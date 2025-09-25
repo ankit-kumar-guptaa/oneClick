@@ -2,6 +2,7 @@
 session_start();
 require_once 'includes/config.php';
 require_once 'routes/web.php';
+require_once 'includes/visitor-tracker.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

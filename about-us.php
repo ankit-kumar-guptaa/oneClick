@@ -39,7 +39,7 @@ require_once 'routes/web.php';
             </div>
         </div>
     </section>
-
+    <?php include 'includes/enquiry-form.php'; ?>
     <!-- About Hero Section -->
     <section class="oci-about-hero py-5">
         <div class="container">

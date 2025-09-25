@@ -15,6 +15,8 @@
     --oci-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     --oci-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --oci-gradient: linear-gradient(135deg, var(--oci-primary), var(--oci-primary-light));
+    --oci-gradient-purple: linear-gradient(135deg, #4776E6, #8E54E9);
+    --oci-gradient-light: linear-gradient(135deg, #f8f9fa, #ffffff);
 }
 
 /* Top Bar */
@@ -22,6 +24,101 @@
     background: var(--oci-light);
     padding: 8px 0;
     font-size: 13px;
+}
+
+/* Hero Section Styles */
+.oci-hero-section {
+    padding: 60px 0;
+    position: relative;
+    overflow: hidden;
+    background: var(--oci-gradient-light);
+}
+
+.oci-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%232563eb' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.5;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover {
+    transform: translateY(-5px);
+}
+
+.oneclick-section-label {
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.text-gradient {
+    background: var(--oci-gradient-purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-features {
+    margin: 30px 0;
+}
+
+.feature-item {
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.feature-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.hero-enquiry-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+/* Responsive Hero Section */
+@media (max-width: 991.98px) {
+    .oci-hero-section {
+        padding: 40px 0;
+    }
+    
+    .hero-content {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .hero-title {
+        font-size: 2rem !important;
+    }
+    
+    .hero-desc {
+        font-size: 1rem !important;
+    }
+    
+    .feature-item {
+        margin-bottom: 15px;
+    }
 }
 
 .top-bar-info {
@@ -817,6 +914,44 @@
     }
 }
 
+/* Enquiry Form in Hero Section */
+.hero-enquiry-wrapper {
+    position: relative;
+    z-index: 10;
+}
+
+.hero-enquiry-form {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border: 1px solid var(--oci-border);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.hero-enquiry-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.hero-form-header {
+    background: var(--oci-gradient);
+    padding: 15px 20px;
+    color: white;
+    text-align: center;
+}
+
+.hero-form-header h4 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.hero-form-body {
+    padding: 20px;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .oci-product-card {
@@ -841,6 +976,10 @@
     
     .products-main-title {
         font-size: 1.8rem;
+    }
+    
+    .hero-enquiry-form {
+        margin-top: 30px;
     }
 }
 

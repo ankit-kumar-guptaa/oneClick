@@ -321,7 +321,7 @@ $stmt->close();
                                         <tbody>
                                             <?php foreach ($recentInquiries as $inquiry): ?>
                                             <tr>
-                                                <td><?php echo htmlspecialchars($inquiry['name']); ?></td>
+                                                <td><?php echo htmlspecialchars($inquiry['full_name']); ?></td>
                                                 <td><?php echo htmlspecialchars($inquiry['phone']); ?></td>
                                                 <td><?php echo htmlspecialchars($inquiry['insurance_type']); ?></td>
                                                 <td><?php echo date('M d, Y', strtotime($inquiry['created_at'])); ?></td>
@@ -364,7 +364,7 @@ $stmt->close();
                                         <tbody>
                                             <?php foreach ($topPages as $page): ?>
                                             <tr>
-                                                <td><?php echo htmlspecialchars(basename($page['page_url'])); ?></td>
+                                                <td><?php echo htmlspecialchars(basename($page['page_visited'])); ?></td>
                                                 <td><?php echo $page['visits']; ?></td>
                                             </tr>
                                             <?php endforeach; ?>

@@ -22,6 +22,40 @@ class VisitorTracker {
     public function __construct() {
         $this->db = new Database();
         $this->conn = $this->db->getConnection();
+        
+        // Ensure tables exist
+        $this->createTablesIfNotExist();
+    }
+    
+    /**
+     * Create necessary tables if they don't exist
+     */
+    private function createTablesIfNotExist() {
+        // Create visitors table
+        $visitorTable = "CREATE TABLE IF NOT EXISTS visitors (
+            id INT(11) AUTO_INCREMENT PRIMARY KEY,
+            ip_address VARCHAR(45) NOT NULL,
+            user_agent TEXT,
+            page_visited VARCHAR(255) NOT NULL,
+            referrer_url TEXT,
+            visit_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            session_id VARCHAR(255) NOT NULL,
+            is_unique TINYINT(1) DEFAULT 1
+        )";
+        
+        // Create visitor_stats table
+        $visitorStatsTable = "CREATE TABLE IF NOT EXISTS visitor_stats (
+            id INT(11) AUTO_INCREMENT PRIMARY KEY,
+            date DATE NOT NULL,
+            page_url VARCHAR(255) NOT NULL,
+            total_visits INT(11) DEFAULT 0,
+            unique_visits INT(11) DEFAULT 0,
+            UNIQUE KEY date_page (date, page_url)
+        )";
+        
+        // Execute table creation queries
+        $this->conn->query($visitorTable);
+        $this->conn->query($visitorStatsTable);
     }
     
     /**

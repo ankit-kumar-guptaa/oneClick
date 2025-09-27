@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['admin_username'] = $user['username'];
                 
                 // Update last login time
-                $updateSql = "UPDATE users SET last_login = NOW() WHERE id = " . $user['id'];
-                $conn->query($updateSql);
+                // $updateSql = "UPDATE users SET last_login = NOW() WHERE id = " . $user['id'];
+                // $conn->query($updateSql);
                 
                 // Redirect to admin dashboard
                 header('Location: index.php');

@@ -4,7 +4,7 @@ require_once '../includes/config.php';
 require_once '../includes/database.php';
 
 // Check if user is logged in as admin
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: login.php");
     exit();
 }
@@ -45,9 +45,9 @@ if ($result->num_rows > 0) {
 }
 
 // Get page statistics
-$page_sql = "SELECT page_visited, SUM(total_visits) as total_visits, SUM(unique_visits) as unique_visits 
-             FROM visitor_stats 
-             WHERE date BETWEEN '$start_date' AND '$end_date' 
+$page_sql = "SELECT page_visited, COUNT(*) as total_visits, COUNT(DISTINCT ip_address) as unique_visits 
+             FROM visitors 
+             WHERE visit_time BETWEEN '$start_date 00:00:00' AND '$end_date 23:59:59' 
              GROUP BY page_visited 
              ORDER BY total_visits DESC 
              LIMIT 10";

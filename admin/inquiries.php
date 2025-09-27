@@ -4,7 +4,7 @@ require_once '../includes/config.php';
 require_once '../includes/database.php';
 
 // Check if user is logged in as admin
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: login.php");
     exit();
 }

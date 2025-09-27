@@ -5,9 +5,9 @@
  */
 class Database {
     private $host = "localhost";
-    private $username = "root";
-    private $password = "";
-    private $database = "oneclick_insurance";
+    private $username = "u511651506_oneclick";
+    private $password = "Raja@123321@";
+    private $database = "u511651506_oneclick";
     private $conn;
 
     /**

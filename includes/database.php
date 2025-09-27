@@ -5,10 +5,15 @@
  */
 class Database {
     private $host = "localhost";
-    private $username = "u511651506_oneclick";
-    private $password = "Raja@123321@";
-    private $database = "u511651506_oneclick";
+    private $username = "root";
+    private $password = "";
+    private $database = "oneclick";
     private $conn;
+    // private $host = "localhost";
+    // private $username = "u511651506_oneclick";
+    // private $password = "Raja@123321@";
+    // private $database = "u511651506_oneclick";
+    // private $conn;
 
     /**
      * Constructor - Establishes database connection
@@ -70,6 +75,7 @@ class Database {
             email VARCHAR(100) NOT NULL UNIQUE,
             full_name VARCHAR(100) NOT NULL,
             role ENUM('admin', 'manager', 'staff') NOT NULL DEFAULT 'staff',
+            last_login DATETIME NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";

@@ -181,11 +181,11 @@ $stmt->close();
             <!-- Main Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">डैशबोर्ड</h1>
+                    <h1 class="h2">Dashboard</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-primary">शेयर करें</button>
-                            <button type="button" class="btn btn-sm btn-outline-primary">एक्सपोर्ट करें</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">Share</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">Export</button>
                         </div>
                     </div>
                 </div>
@@ -197,9 +197,9 @@ $stmt->close();
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">आज के विज़िटर</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Today's Visitors</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $todayStats['total_visits'] ?? 0; ?></div>
-                                        <div class="small text-muted mt-2">यूनिक: <?php echo $todayStats['unique_visits'] ?? 0; ?></div>
+                                        <div class="small text-muted mt-2">Unique: <?php echo $todayStats['unique_visits'] ?? 0; ?></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar-day stat-icon text-primary"></i>
@@ -214,9 +214,9 @@ $stmt->close();
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">पिछले 7 दिनों के विज़िटर</div>
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Last 7 Days Visitors</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $last7DaysStats['total_visits'] ?? 0; ?></div>
-                                        <div class="small text-muted mt-2">यूनिक: <?php echo $last7DaysStats['unique_visits'] ?? 0; ?></div>
+                                        <div class="small text-muted mt-2">Unique: <?php echo $last7DaysStats['unique_visits'] ?? 0; ?></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar-week stat-icon text-success"></i>
@@ -231,7 +231,7 @@ $stmt->close();
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">कुल पूछताछ</div>
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Inquiries</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalInquiries; ?></div>
                                     </div>
                                     <div class="col-auto">
@@ -247,7 +247,7 @@ $stmt->close();
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">आज की नई पूछताछ</div>
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Today's New Inquiries</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $newInquiries; ?></div>
                                     </div>
                                     <div class="col-auto">
@@ -264,7 +264,7 @@ $stmt->close();
                     <div class="col-lg-8 mb-4">
                         <div class="card card-dashboard">
                             <div class="card-header">
-                                <h6 class="m-0 font-weight-bold">विज़िटर आंकड़े (पिछले 7 दिन)</h6>
+                                <h6 class="m-0 font-weight-bold">Visitor Statistics (Last 7 Days)</h6>
                             </div>
                             <div class="card-body">
                                 <canvas id="visitorChart" height="300"></canvas>
@@ -275,7 +275,7 @@ $stmt->close();
                     <div class="col-lg-4 mb-4">
                         <div class="card card-dashboard">
                             <div class="card-header">
-                                <h6 class="m-0 font-weight-bold">बीमा प्रकार के अनुसार पूछताछ</h6>
+                                <h6 class="m-0 font-weight-bold">Inquiries by Insurance Type</h6>
                             </div>
                             <div class="card-body">
                                 <canvas id="inquiryTypeChart" height="300"></canvas>
@@ -398,7 +398,7 @@ $stmt->close();
                 labels: <?php echo json_encode($dailyLabels); ?>,
                 datasets: [
                     {
-                        label: 'कुल विज़िट',
+                        label: 'Total Visits',
                         data: <?php echo json_encode($dailyVisitorData); ?>,
                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
                         borderColor: 'rgba(54, 162, 235, 1)',
@@ -406,7 +406,7 @@ $stmt->close();
                         tension: 0.3
                     },
                     {
-                        label: 'यूनिक विज़िट',
+                        label: 'Unique Visits',
                         data: <?php echo json_encode($dailyUniqueVisitorData); ?>,
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor: 'rgba(255, 99, 132, 1)',

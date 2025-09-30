@@ -6,7 +6,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 }
 
 require_once '../includes/database.php';
-// require_once '../includes/visitor-tracker.php';
+require_once '../includes/visitor-tracker.php';
 
 // Initialize database connection
 $db = new Database();

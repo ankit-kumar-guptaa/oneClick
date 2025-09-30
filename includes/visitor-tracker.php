@@ -158,22 +158,17 @@ class VisitorTracker {
         $startDate = $this->db->escapeString($startDate);
         $endDate = $this->db->escapeString($endDate);
         
-        $sql = "SELECT date, SUM(total_visits) as total_visits, SUM(unique_visits) as unique_visits 
+        $sql = "SELECT SUM(total_visits) as total_visits, SUM(unique_visits) as unique_visits 
                 FROM visitor_stats 
-                WHERE date BETWEEN '$startDate' AND '$endDate' 
-                GROUP BY date 
-                ORDER BY date";
+                WHERE date BETWEEN '$startDate' AND '$endDate'";
         
         $result = $this->conn->query($sql);
-        $stats = [];
         
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $stats[] = $row;
-            }
+        if ($result && $result->num_rows > 0) {
+            return $result->fetch_assoc();
         }
         
-        return $stats;
+        return ['total_visits' => 0, 'unique_visits' => 0];
     }
     
     /**

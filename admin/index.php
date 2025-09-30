@@ -29,13 +29,32 @@ $dailyVisitorData = [];
 $dailyUniqueVisitorData = [];
 $dailyLabels = [];
 
-for ($i = 6; $i >= 0; $i--) {
-    $date = date('Y-m-d', strtotime("-$i days"));
-    $dailyLabels[] = date('M d', strtotime($date));
-    
-    $dailyStats = $visitorTracker->getVisitorStats($date, $date);
-    $dailyVisitorData[] = $dailyStats['total_visits'] ?? 0;
-    $dailyUniqueVisitorData[] = $dailyStats['unique_visits'] ?? 0;
+// Get visitor statistics from database directly like in visitors.php
+$last7Days = date('Y-m-d', strtotime('-6 days'));
+$today = date('Y-m-d');
+
+$sql = "SELECT date, SUM(total_visits) as total_visits, SUM(unique_visits) as unique_visits 
+        FROM visitor_stats 
+        WHERE date BETWEEN '$last7Days' AND '$today' 
+        GROUP BY date 
+        ORDER BY date";
+
+$result = $conn->query($sql);
+
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $dailyLabels[] = date('M d', strtotime($row['date']));
+        $dailyVisitorData[] = $row['total_visits'];
+        $dailyUniqueVisitorData[] = $row['unique_visits'];
+    }
+} else {
+    // Fallback to empty data if no results
+    for ($i = 6; $i >= 0; $i--) {
+        $date = date('Y-m-d', strtotime("-$i days"));
+        $dailyLabels[] = date('M d', strtotime($date));
+        $dailyVisitorData[] = 0;
+        $dailyUniqueVisitorData[] = 0;
+    }
 }
 
 // Get inquiry statistics - mysqli method
@@ -162,11 +181,11 @@ $stmt->close();
             <!-- Main Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
+                    <h1 class="h2">डैशबोर्ड</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">शेयर करें</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">एक्सपोर्ट करें</button>
                         </div>
                     </div>
                 </div>
@@ -178,9 +197,9 @@ $stmt->close();
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Today's Visitors</div>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">आज के विज़िटर</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $todayStats['total_visits'] ?? 0; ?></div>
-                                        <div class="small text-muted mt-2">Unique: <?php echo $todayStats['unique_visits'] ?? 0; ?></div>
+                                        <div class="small text-muted mt-2">यूनिक: <?php echo $todayStats['unique_visits'] ?? 0; ?></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar-day stat-icon text-primary"></i>
@@ -195,9 +214,9 @@ $stmt->close();
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Last 7 Days Visitors</div>
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">पिछले 7 दिनों के विज़िटर</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $last7DaysStats['total_visits'] ?? 0; ?></div>
-                                        <div class="small text-muted mt-2">Unique: <?php echo $last7DaysStats['unique_visits'] ?? 0; ?></div>
+                                        <div class="small text-muted mt-2">यूनिक: <?php echo $last7DaysStats['unique_visits'] ?? 0; ?></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar-week stat-icon text-success"></i>
@@ -212,7 +231,7 @@ $stmt->close();
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Inquiries</div>
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">कुल पूछताछ</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalInquiries; ?></div>
                                     </div>
                                     <div class="col-auto">
@@ -228,7 +247,7 @@ $stmt->close();
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">New Inquiries Today</div>
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">आज की नई पूछताछ</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $newInquiries; ?></div>
                                     </div>
                                     <div class="col-auto">
@@ -245,7 +264,7 @@ $stmt->close();
                     <div class="col-lg-8 mb-4">
                         <div class="card card-dashboard">
                             <div class="card-header">
-                                <h6 class="m-0 font-weight-bold">Visitor Statistics (Last 7 Days)</h6>
+                                <h6 class="m-0 font-weight-bold">विज़िटर आंकड़े (पिछले 7 दिन)</h6>
                             </div>
                             <div class="card-body">
                                 <canvas id="visitorChart" height="300"></canvas>
@@ -256,7 +275,7 @@ $stmt->close();
                     <div class="col-lg-4 mb-4">
                         <div class="card card-dashboard">
                             <div class="card-header">
-                                <h6 class="m-0 font-weight-bold">Inquiries by Insurance Type</h6>
+                                <h6 class="m-0 font-weight-bold">बीमा प्रकार के अनुसार पूछताछ</h6>
                             </div>
                             <div class="card-body">
                                 <canvas id="inquiryTypeChart" height="300"></canvas>
@@ -372,63 +391,39 @@ $stmt->close();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Visitor Chart
-        var ctx = document.getElementById('visitorChart').getContext('2d');
-        var visitorChart = new Chart(ctx, {
+        const visitorCtx = document.getElementById('visitorChart').getContext('2d');
+        const visitorChart = new Chart(visitorCtx, {
             type: 'line',
             data: {
                 labels: <?php echo json_encode($dailyLabels); ?>,
                 datasets: [
                     {
-                        label: 'Total Visits',
+                        label: 'कुल विज़िट',
                         data: <?php echo json_encode($dailyVisitorData); ?>,
-                        backgroundColor: 'rgba(78, 115, 223, 0.05)',
-                        borderColor: 'rgba(78, 115, 223, 1)',
-                        pointRadius: 3,
-                        pointBackgroundColor: 'rgba(78, 115, 223, 1)',
-                        pointBorderColor: 'rgba(78, 115, 223, 1)',
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: 'rgba(78, 115, 223, 1)',
-                        pointHoverBorderColor: 'rgba(78, 115, 223, 1)',
-                        pointHitRadius: 10,
-                        pointBorderWidth: 2,
-                        fill: true
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2,
+                        tension: 0.3
                     },
                     {
-                        label: 'Unique Visits',
+                        label: 'यूनिक विज़िट',
                         data: <?php echo json_encode($dailyUniqueVisitorData); ?>,
-                        backgroundColor: 'rgba(28, 200, 138, 0.05)',
-                        borderColor: 'rgba(28, 200, 138, 1)',
-                        pointRadius: 3,
-                        pointBackgroundColor: 'rgba(28, 200, 138, 1)',
-                        pointBorderColor: 'rgba(28, 200, 138, 1)',
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: 'rgba(28, 200, 138, 1)',
-                        pointHoverBorderColor: 'rgba(28, 200, 138, 1)',
-                        pointHitRadius: 10,
-                        pointBorderWidth: 2,
-                        fill: true
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        tension: 0.3
                     }
                 ]
             },
             options: {
+                responsive: true,
                 maintainAspectRatio: false,
-                layout: {
-                    padding: {
-                        left: 10,
-                        right: 25,
-                        top: 25,
-                        bottom: 0
-                    }
-                },
                 scales: {
-                    x: {
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        }
-                    },
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
                     }
                 },
                 plugins: {

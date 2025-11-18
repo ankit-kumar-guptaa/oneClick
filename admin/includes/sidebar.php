@@ -16,6 +16,11 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'partner-inquiries.php' ? 'active' : ''; ?>" href="partner-inquiries.php">
+                    <i class="fas fa-handshake"></i> Partner Inquiries
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'visitors.php' ? 'active' : ''; ?>" href="visitors.php">
                     <i class="fas fa-users"></i> Visitors
                 </a>

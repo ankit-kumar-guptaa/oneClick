@@ -70,6 +70,19 @@ $stmt->bind_result($newInquiries);
 $stmt->fetch();
 $stmt->close();
 
+// Get partner inquiry statistics
+$stmt = $conn->prepare("SELECT COUNT(*) as total FROM partner_enquiries");
+$stmt->execute();
+$stmt->bind_result($totalPartnerInquiries);
+$stmt->fetch();
+$stmt->close();
+
+$stmt = $conn->prepare("SELECT COUNT(*) as new FROM partner_enquiries WHERE DATE(created_at) = CURDATE()");
+$stmt->execute();
+$stmt->bind_result($newPartnerInquiries);
+$stmt->fetch();
+$stmt->close();
+
 // Get inquiries by insurance type
 $stmt = $conn->prepare("SELECT insurance_type, COUNT(*) as count FROM enquiries GROUP BY insurance_type ORDER BY count DESC");
 $stmt->execute();
@@ -95,6 +108,16 @@ $result = $stmt->get_result();
 $recentInquiries = [];
 while ($row = $result->fetch_assoc()) {
     $recentInquiries[] = $row;
+}
+$stmt->close();
+
+// Get recent partner inquiries
+$stmt = $conn->prepare("SELECT * FROM partner_enquiries ORDER BY created_at DESC LIMIT 5");
+$stmt->execute();
+$result = $stmt->get_result();
+$recentPartnerInquiries = [];
+while ($row = $result->fetch_assoc()) {
+    $recentPartnerInquiries[] = $row;
 }
 $stmt->close();
 
@@ -257,6 +280,39 @@ $stmt->close();
                             </div>
                         </div>
                     </div>
+
+                    <!-- Partner Inquiries Cards -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card stat-card info card-dashboard h-100">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Partner Inquiries</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalPartnerInquiries; ?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-handshake stat-icon text-info"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card stat-card success card-dashboard h-100">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Today's Partner Inquiries</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $newPartnerInquiries; ?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-handshake stat-icon text-success"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Charts -->
@@ -363,6 +419,64 @@ $stmt->close();
                                 </div>
                                 <div class="text-center mt-3">
                                     <a href="visitors.php" class="btn btn-primary btn-sm">View All Statistics</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Partner Inquiries -->
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="card card-dashboard">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold">Recent Partner Inquiries</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Contact Person</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>Message</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($recentPartnerInquiries as $partner): ?>
+                                            <tr>
+                                                <td><?php echo htmlspecialchars($partner['contact_person']); ?></td>
+                                                <td><?php echo htmlspecialchars($partner['email']); ?></td>
+                                                <td><?php echo htmlspecialchars($partner['phone']); ?></td>
+                                                <td><?php echo htmlspecialchars(substr($partner['message'] ?? '', 0, 50) . (strlen($partner['message'] ?? '') > 50 ? '...' : '')); ?></td>
+                                                <td><?php echo date('M d, Y', strtotime($partner['created_at'])); ?></td>
+                                                <td>
+                                                    <span class="badge bg-<?php 
+                                                        switch($partner['status'] ?? 'new') {
+                                                            case 'contacted': echo 'warning';
+                                                            case 'accepted': echo 'success';
+                                                            case 'rejected': echo 'danger';
+                                                            default: echo 'primary';
+                                                        }
+                                                    ?>">
+                                                        <?php echo ucfirst($partner['status'] ?? 'new'); ?>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                            <?php if (empty($recentPartnerInquiries)): ?>
+                                            <tr>
+                                                <td colspan="6" class="text-center">No partner inquiries found</td>
+                                            </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <a href="partner-inquiries.php" class="btn btn-primary btn-sm">View All Partner Inquiries</a>
                                 </div>
                             </div>
                         </div>

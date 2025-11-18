@@ -527,7 +527,7 @@
     border-radius: 20px;
     overflow: hidden;
     box-shadow: var(--oci-shadow-lg);
-    height: 316px;
+    height: 240px;
 }
 
 .oneclick-slider-card {
@@ -538,8 +538,8 @@
 
 .oneclick-slider-card img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    /* height: 100%; */
+    object-fit: contain;
 }
 
 .slider-overlay {
@@ -2272,8 +2272,7 @@
         transform: scaleX(1);
     }
 }
-    border-radius: 3px 3px 0 0;
-}
+    
 
 .signin-tab-content {
     display: none;
@@ -2540,4 +2539,194 @@
 
 .oneclick-popup-form.active {
     animation: slideInUp 0.5s ease forwards;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* pages css insurance */
+/* Car Insurance Page Universal Styles (Bootstrap friendly) */
+
+/* Page header */
+.oci-page-header {
+  background: linear-gradient(98deg, #4875e1 80%, #7b8de3 100%);
+  padding: 42px 0 40px 0;
+  border-radius: 0 0 24px 24px;
+}
+.oci-breadcrumb {
+  font-size: 1rem;
+  color: #e6eafe;
+  margin-bottom: 10px;
+}
+.oci-breadcrumb a {color:#fff;text-decoration:none;opacity:.9;}
+.oci-breadcrumb span {color:#cfd8fb;padding:0 4px;}
+.page-title { font-size:2rem; font-weight:700; margin-bottom:7px; letter-spacing:0.02em;}
+.page-subtitle { font-size:1.09rem;}
+
+/* Hero Section */
+.oci-hero-section {
+  background: linear-gradient(90deg,#f6f8fa 80%,#eaf2fe 100%);
+  border-bottom:1px solid #e5eaf4;
+}
+.hero-content {
+  background: #fff;
+  border-radius:20px;
+  box-shadow: 0 8px 32px rgba(72,123,231,.09);
+}
+.oneclick-section-label {
+  font-size: .95rem;
+  font-weight: 600;
+  background: #eaf2fe;
+  color: #497be7;
+  letter-spacing: .03em;
+}
+.hero-title { font-size:2.5rem; color:#27458a;}
+.text-gradient {
+  background: linear-gradient(90deg,#497be7 49%,#8E54E9 90%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip:text; color: transparent;
+}
+.hero-desc { font-size:1.12rem; color:#3c4167;}
+.hero-features .feature-item {
+  background: #f7f9fd;
+  border-radius:12px;
+  box-shadow: 0 2px 10px rgba(73,123,231,.04);
+  font-size:1.03rem;
+}
+.feature-icon {
+  width:38px;height:38px;
+  background: #eaf2fe;
+  display: flex;align-items:center;justify-content:center;
+  border-radius:50%;font-size:1.4rem;
+}
+.hero-cta .btn {
+  min-width:135px;
+  font-weight:500;
+  font-size:1.02rem;
+  letter-spacing:.01em;
+  box-shadow:0 2px 10px rgba(73,123,231,.06);
+}
+.hero-cta .btn-outline-secondary {
+  border-color:#497be7;
+  color:#497be7;
+}
+
+/* Insurance Types */
+.oci-insurance-types {
+  background: #f8fbff;
+  border-top:1px solid #e8eaf7;
+}
+.section-title {
+  font-size:1.6rem;font-weight:700;color:#2947a2;margin:10px 0 12px 0;
+}
+.section-desc {color:#7481b3;font-size:1.09rem;}
+.insurance-type-card {
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 5px 18px rgba(68,117,225,.09);
+  padding:28px 18px 23px 18px;
+  min-height:330px;
+  border:1px solid #e7eafb;
+  transition:box-shadow .18s;
+  position:relative;
+  display:flex;flex-direction:column;align-items:flex-start;gap:9px;
+}
+.insurance-type-card:hover {box-shadow: 0 10px 40px rgba(68,117,225,0.17);}
+.card-icon {
+  background:linear-gradient(135deg,#497be7 69%,#8E54E9 100%);
+  color:#fff;
+  border-radius:50%;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  font-size:1.52rem;margin-bottom:8px;
+}
+.insurance-type-card h3 {font-size:1.23rem;font-weight:600;color:#284688;}
+.insurance-type-card p {font-size:1rem;color:#3c4167;}
+.insurance-features {list-style:none;padding-left:0;margin:4px 0 12px 0;}
+.insurance-features li {font-size:.98rem;color:#465481;margin-bottom:4px;}
+.insurance-features li i {color:#497be7;margin-right:8px;}
+.insurance-type-card .btn-outline-primary {
+  border-radius:7px;
+  font-size:.97rem;
+}
+
+/* Benefits Section */
+.oci-benefits-section {background:#fff;}
+.benefit-card {
+  background:#f6f9ff;
+  border-radius:16px;
+  box-shadow: 0 3px 12px rgba(73,123,231,.05);
+  padding:22px 18px 17px 18px;
+  margin-bottom: 6px;
+  border:1px solid #e6eaf2;
+  transition:box-shadow .16s;
+  text-align:left;
+}
+.benefit-card:hover {box-shadow:0 8px 28px rgba(73,123,231,.11);}
+.benefit-icon {
+  width:38px;height:38px;
+  background: #eaf2fe;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  font-size: 1.4rem;margin-bottom:8px;
+}
+.benefit-card h4 {font-size:1.11rem;font-weight:600;color:#27598b;margin-bottom:4px;}
+.benefit-card p {font-size:1rem;color:#596b91;}
+
+/* CTA Section */
+.oci-cta-section {background:#f6faff;}
+.cta-card {
+  background: linear-gradient(90deg, #497be7 71%, #8E54E9 100%);
+  border-radius:24px;
+  color:#fff;
+  box-shadow: 0 6px 40px rgba(73,123,231,.11);
+  padding:48px 20px;
+}
+.cta-buttons .btn-lg { font-size:1.09rem;font-weight:600;min-width:135px; }
+.cta-card h2 {font-size:2rem;font-weight:700;color:#fff;}
+.cta-card .lead {font-size:1.16rem;}
+
+.oci-faq-section .accordion-button {
+  background:#f4f8fd;
+  font-size:1.05rem;
+  font-weight:600;color:#2947a2;
+  border-radius:9px !important;
+}
+.oci-faq-section .accordion-body {
+  font-size:.99rem;color:#495486;
+  background:#fff;
+  border-radius:6px;
+}
+
+/* Universal responsive spacing/shadow tweaks */
+@media (max-width:800px){
+  .hero-title{font-size:2.1rem;}
+  .insurance-type-card{min-height:230px;padding:22px 8px 18px 8px;}
+  .cta-card{padding:26px 7px;}
+}
+@media (max-width:480px){
+  .oci-page-header{padding:22px 0 18px 0;}
+  .hero-title{font-size:1.36rem;}
+  .section-title{font-size:1.13rem;}
+  .benefit-card, .insurance-type-card{padding:13px 5px 11px 5px;}
+  .cta-card{padding:10px 2px;}
+}
+
+
+
+.oneclick-btn-outline.oneclick-btn-large:hover {
+  color: #000; 
+  background-color: #f0f0f0; 
+  border-color: #86a0d8; 
 }

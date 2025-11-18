@@ -1,280 +1,164 @@
-<!-- Attractive Enquiry Form for OneClick Insurance -->
-<div class="oneclick-enquiry-form">
-    <div class="enquiry-form-container">
-        <div class="enquiry-form-header">
-            <div class="form-icon-wrapper">
-                <div class="form-icon-circle">
-                    <i class="fas fa-headset"></i>
-                </div>
-            </div>
-            <h4>Quick Enquiry</h4>
-            <p>Get expert insurance advice within 24 hours</p>
-        </div>
-        <form id="quickEnquiryForm" method="post" action="includes/process-enquiry.php">
-            <div class="form-group mb-3">
-                <div class="input-group input-group-lg">
-                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    <input type="text" class="form-control custom-input" id="fullName" name="fullName" placeholder="Your Full Name" required>
-                </div>
-            </div>
-            <div class="form-group mb-3">
-                <div class="input-group input-group-lg">
-                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                    <input type="email" class="form-control custom-input" id="emailAddress" name="emailAddress" placeholder="Email Address" required>
-                </div>
-            </div>
-            <div class="form-group mb-3">
-                <div class="input-group input-group-lg">
-                    <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
-                    <input type="tel" class="form-control custom-input" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required>
-                </div>
-            </div>
-            <div class="form-group mb-3">
-                <div class="input-group input-group-lg">
-                    <span class="input-group-text"><i class="fas fa-shield-alt"></i></span>
-                    <select class="form-select custom-input" id="insuranceType" name="insuranceType" required>
-                        <option value="" selected disabled>Select Insurance Type</option>
-                        <option value="car">Car Insurance</option>
-                        <option value="bike">Two Wheeler Insurance</option>
-                        <option value="health">Health Insurance</option>
-                        <option value="term">Term Life Insurance</option>
-                        <option value="travel">Travel Insurance</option>
-                        <option value="home">Home Insurance</option>
-                        <option value="other">Other Insurance</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group mb-3">
-                <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-comment"></i></span>
-                    <textarea class="form-control custom-input" id="message" name="message" placeholder="Your Message (Optional)" rows="3"></textarea>
-                </div>
-            </div>
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary btn-lg enquiry-submit-btn">
-                    <span>Get Free Quote</span> <i class="fas fa-arrow-right ms-2"></i>
-                </button>
-            </div>
-            <div class="form-security-badge text-center mt-3">
-                <i class="fas fa-lock me-1"></i> Your data is secure & confidential
-            </div>
-        </form>
+<!-- OneClick Minimal Enquiry Form - Compact, Blue-White, AJAX+Notify -->
+<div class="oc-enquiry-minimal">
+  <form id="quickEnquiryForm" method="post" action="includes/process-enquiry.php" autocomplete="off" class="oc-mini-form">
+    <div class="ocm-header">
+      <span class="ocm-icon"><i class="fas fa-headset"></i></span>
+      <span class="ocm-title">Quick Enquiry</span>
     </div>
+    <input type="text" name="fullName" class="ocm-input" placeholder="Full Name*" required>
+    <input type="email" name="emailAddress" class="ocm-input" placeholder="Email Address*" required>
+    <input type="tel" name="phoneNumber" class="ocm-input" maxlength="10" pattern="[0-9]{10}" placeholder="Phone Number*" required>
+    <select name="insuranceType" class="ocm-input" required>
+      <option value="" disabled selected>Insurance Type*</option>
+      <option value="car">Car Insurance</option>
+      <option value="bike">Two Wheeler</option>
+      <option value="health">Health</option>
+      <option value="term">Term Life</option>
+      <option value="travel">Travel</option>
+      <option value="home">Home</option>
+      <option value="other">Other</option>
+    </select>
+    <textarea name="message" class="ocm-input" rows="2" placeholder="Message (optional)"></textarea>
+    <button type="submit" class="ocm-btn" id="ocmSubmitBtn">
+      <span class="btn-text">Get Free Quote</span>
+      <span class="btn-loader" style="display:none;"><i class="fas fa-spinner fa-spin"></i></span>
+      <i class="fas fa-arrow-right"></i>
+    </button>
+    <div class="ocm-note"><i class="fas fa-lock"></i> Your data is secure</div>
+  </form>
+  <div class="ocm-toast" id="ocmToast"></div>
 </div>
 
+<!-- Minimal Component Styles -->
 <style>
-/* Enquiry Form Styles */
-.oneclick-enquiry-form {
-    background: linear-gradient(145deg, #ffffff, #f8f9fa);
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-    overflow: hidden;
-    border: none;
-    transition: all 0.4s ease;
-    position: relative;
+.oc-enquiry-minimal {
+  max-width: 320px;
+  margin: 28px auto 0 auto;
 }
-
-.oneclick-enquiry-form:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+.oc-mini-form {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 17px rgba(71,123,231,0.10);
+  border:1px solid #e5eaf4;
+  padding: 14px 12px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+  transition: box-shadow 0.21s;
 }
-
-.oneclick-enquiry-form::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    background: linear-gradient(90deg, #4776E6, #8E54E9);
+.oc-mini-form:focus-within { box-shadow: 0 6px 20px rgba(71,123,231,0.13);}
+.ocm-header { display: flex; align-items: center; gap:9px; margin-bottom:7px;}
+.ocm-icon {
+  background: linear-gradient(130deg, #497be7 75%, #3595e6 100%);
+  color: #fff;
+  border-radius: 50%;
+  width: 28px; height: 28px; display: grid; place-items:center;
+  font-size: 1rem; margin-bottom: 1px;
 }
-
-.enquiry-form-container {
-    padding: 30px 25px;
+.ocm-title { font-weight: 600; color: #2856a7; font-size: 1.03rem; }
+.ocm-input {
+  font-size: 0.93rem; padding: 7.7px 12px;
+  border-radius: 7px; border: 1px solid #dbe7fa;
+  background: #f7faff; outline: none;
+  color: #35425c; transition: box-shadow 0.2s, border-color 0.2s;
 }
-
-.enquiry-form-header {
-    text-align: center;
-    margin-bottom: 25px;
-    position: relative;
+.ocm-input:focus {
+  border-color: #497be7;
+  background: #fff;
+  box-shadow: 0 0 0 1.5px rgba(71,123,231,0.11);
 }
-
-.form-icon-wrapper {
-    margin-bottom: 15px;
+.ocm-btn {
+  margin-top: 2px;
+  background: linear-gradient(90deg, #497be7 80%, #899cf4 100%);
+  color: #fff; border: none;
+  font-size: 0.98rem; font-weight: 600; padding: 9px 0;
+  border-radius: 7px;
+  box-shadow: 0 1.5px 6px rgba(71,123,231,0.12);
+  cursor: pointer;
+  transition: background 0.13s;
+  display: flex; align-items: center; justify-content: center; gap:6px;
 }
-
-.form-icon-circle {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #4776E6, #8E54E9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    box-shadow: 0 10px 20px rgba(71, 118, 230, 0.3);
-    animation: pulse-light 2s infinite;
+.ocm-btn:hover { background: linear-gradient(90deg, #3155b5 80%, #497be7 100%);}
+.ocm-btn .btn-loader { margin-right:5px;}
+.ocm-btn:disabled { opacity: 0.74; cursor: not-allowed;}
+.ocm-note {
+  font-size: 0.83rem; color: #7283a2;
+  text-align: center; margin-top: 2px;
 }
-
-.form-icon-circle i {
-    font-size: 28px;
-    color: white;
+.ocm-note i { color: #497be7; margin-right: 3px; font-size:0.95em;}
+.ocm-toast {
+  display: none; position: fixed; top: 28px; left: 50%;
+  transform: translateX(-50%);
+  background: #497be7; color: #fff;
+  padding: 9px 28px; border-radius: 6px;
+  box-shadow: 0 2px 16px rgba(71,123,231,0.08);
+  z-index: 999; font-size: 1rem; animation: toastpop 0.37s;
 }
-
-.enquiry-form-header h4 {
-    color: #333;
-    font-weight: 700;
-    margin-bottom: 8px;
-    font-size: 1.6rem;
+@keyframes toastpop {
+  0% { opacity: 0; transform: translate(-50%, -16px);}
+  100% { opacity:1; transform: translate(-50%,0);}
 }
-
-.enquiry-form-header p {
-    color: #666;
-    font-size: 0.95rem;
-    opacity: 0.9;
-}
-
-/* Input styling */
-.oneclick-enquiry-form .input-group-text {
-    background: linear-gradient(135deg, #4776E6, #8E54E9);
-    color: white;
-    border: none;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-}
-
-.oneclick-enquiry-form .custom-input {
-    border: 1px solid #e1e5eb;
-    padding: 12px 16px;
-    border-radius: 0 8px 8px 0 !important;
-    font-weight: 500;
-    transition: all 0.3s;
-    font-size: 1rem;
-    background-color: #f8f9fa;
-}
-
-.oneclick-enquiry-form .custom-input:focus {
-    border-color: #8E54E9;
-    box-shadow: 0 0 0 3px rgba(142, 84, 233, 0.15);
-    background-color: #fff;
-}
-
-.oneclick-enquiry-form textarea.custom-input {
-    min-height: 100px;
-}
-
-/* Button styling */
-.enquiry-submit-btn {
-    background: linear-gradient(135deg, #4776E6, #8E54E9) !important;
-    border: none;
-    padding: 15px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    z-index: 1;
-}
-
-.enquiry-submit-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #8E54E9, #4776E6);
-    transition: all 0.6s ease;
-    z-index: -1;
-}
-
-.enquiry-submit-btn:hover::before {
-    left: 0;
-}
-
-.enquiry-submit-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(71, 118, 230, 0.4);
-}
-
-.form-security-badge {
-    font-size: 0.85rem;
-    color: #666;
-    font-weight: 500;
-}
-
-/* Animations */
-@keyframes pulse-light {
-    0% {
-        box-shadow: 0 0 0 0 rgba(142, 84, 233, 0.4);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(142, 84, 233, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(142, 84, 233, 0);
-    }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .enquiry-form-container {
-        padding: 25px 20px;
-    }
-    
-    .enquiry-form-header h4 {
-        font-size: 1.4rem;
-    }
-    
-    .form-icon-circle {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .form-icon-circle i {
-        font-size: 24px;
-    }
-}
+@media (max-width:450px) { .oc-mini-form{padding:7px 2px 7px 2px;} }
 </style>
 
 <script>
-// Form validation and submission
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('quickEnquiryForm');
-    
-    if(form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic form validation
-            const fullName = document.getElementById('fullName').value;
-            const email = document.getElementById('emailAddress').value;
-            const phone = document.getElementById('phoneNumber').value;
-            const insuranceType = document.getElementById('insuranceType').value;
-            
-            if(!fullName || !email || !phone || !insuranceType) {
-                alert('Please fill all required fields');
-                return false;
-            }
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if(!emailRegex.test(email)) {
-                alert('Please enter a valid email address');
-                return false;
-            }
-            
-            // Phone validation - basic check for numbers only
-            const phoneRegex = /^[0-9]{10}$/;
-            if(!phoneRegex.test(phone)) {
-                alert('Please enter a valid 10-digit phone number');
-                return false;
-            }
-            
-            // If validation passes, submit the form to backend
-            form.submit();
-        });
-    }
+  const form = document.getElementById('quickEnquiryForm');
+  const toast = document.getElementById('ocmToast');
+  const submitBtn = document.getElementById('ocmSubmitBtn');
+  const btnText = submitBtn.querySelector('.btn-text');
+  const btnLoader = submitBtn.querySelector('.btn-loader');
+
+  if(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Compact validation
+      const fullName = form.fullName.value.trim();
+      const email = form.emailAddress.value.trim();
+      const phone = form.phoneNumber.value.trim();
+      const insuranceType = form.insuranceType.value;
+      if(!fullName || !email || !phone || !insuranceType) {
+        showToast('Fill all required fields');
+        return false;
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!emailRegex.test(email)) {
+        showToast('Enter valid email');
+        return false;
+      }
+      const phoneRegex = /^[0-9]{10}$/;
+      if(!phoneRegex.test(phone)) {
+        showToast('Enter 10-digit phone');
+        return false;
+      }
+
+      submitBtn.disabled = true;
+      btnText.style.display = 'none';
+      btnLoader.style.display = 'inline-block';
+
+      const FD = new FormData(form);
+      fetch(form.action, { method: "POST", body: FD })
+      .then(res => res.text())
+      .then(data => {
+        showToast("Your enquiry submitted successfully!");
+        form.reset();
+      })
+      .catch(() => {
+        showToast("Something went wrong!");
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        btnText.style.display = 'inline-block';
+        btnLoader.style.display = 'none';
+      });
+    });
+  }
+  function showToast(msg) {
+    toast.innerText = msg;
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 2100);
+  }
 });
 </script>

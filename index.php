@@ -49,6 +49,10 @@ require_once 'includes/visitor-tracker.php';
                             <i class="fas fa-bolt"></i>
                             Get Instant Quote
                         </button>
+                        <button class="oneclick-btn-outline oneclick-btn-large ms-3" data-bs-toggle="modal" data-bs-target="#partnerModal">
+                            <i class="fas fa-handshake"></i>
+                            Become a Partner
+                        </button>
                     </div>
                 </div>
             </div>
@@ -59,35 +63,35 @@ require_once 'includes/visitor-tracker.php';
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <div class="oneclick-slider-card">
-                                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=350&fit=crop" alt="Car Insurance">
-                                    <div class="slider-overlay">
+                                    <img src="assets/img/s1.png" alt="Car Insurance">
+                                    <!-- <div class="slider-overlay">
                                         <h4>Car Insurance</h4>
                                         <p>Save up to ₹5,000 yearly</p>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="swiper-slide">
                                 <div class="oneclick-slider-card">
                                     <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=350&fit=crop" alt="Health Insurance">
-                                    <div class="slider-overlay">
+                                    <!-- <div class="slider-overlay">
                                         <h4>Health Insurance</h4>
                                         <p>Coverage from ₹5 lakhs</p>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="swiper-slide">
                                 <div class="oneclick-slider-card">
                                     <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&h=350&fit=crop" alt="Home Insurance">
-                                    <div class="slider-overlay">
+                                    <!-- <div class="slider-overlay">
                                         <h4>Home Insurance</h4>
                                         <p>100% Claim Support</p>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
                         <div class="swiper-pagination"></div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+                        <!-- <div class="swiper-button-next"></div> -->
+                        <!-- <div class="swiper-button-prev"></div> -->
                     </div>
                 </div>
             </div>
@@ -2284,16 +2288,19 @@ require_once 'includes/visitor-tracker.php';
         </section>
 
 
-        <section class="partners pb-4 ">
+        <section class="pb-4 ">
+            <div class="container">
              <div class="row">
                     <div class="col-12 text-center mt-3">
                         <span class="oneclick-section-label">Our Partners</span>
                         <h2 class="oneclick-section-title">Partner with Us</h2>
                     </div>
                 </div>
+                </div>
             <div class="col-lg-12"style="padding:50px" >
                 <img src="assets/img/all-partner-logo.avif" alt=""style="width: 100%;">
             </div>
+
         </section>
     </main>
 
@@ -2337,8 +2344,203 @@ require_once 'includes/visitor-tracker.php';
         });
     </script>
     
+    <!-- Partner Modal -->
+    <div class="modal fade" id="partnerModal" tabindex="-1" aria-labelledby="partnerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content shadow-lg border-0">
+                <div class="modal-header bg-gradient-primary text-white">
+                    <h5 class="modal-title" id="partnerModalLabel">
+                        <i class="fas fa-handshake me-2"></i>
+                        Become a Partner
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="text-center mb-4">
+                        <div class="partner-icon-wrapper">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <p class="text-muted mb-0">Join our network of trusted partners</p>
+                    </div>
+                    
+                    <form id="partnerForm" action="includes/process-partner.php" method="POST">
+                        <input type="hidden" name="partner_form" value="1">
+                        
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="contactPerson" class="form-label fw-semibold">Your Name *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input type="text" class="form-control" id="contactPerson" name="contactPerson" placeholder="Enter your full name" required>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="email" class="form-label fw-semibold">Email Address *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com" required>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label fw-semibold">Phone Number *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10}" placeholder="10-digit number" required>
+                                </div>
+                                <small class="text-muted">10-digit phone number</small>
+                            </div>
+                            
+                            <div class="col-12">
+                                <label for="message" class="form-label fw-semibold">Message</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-comment"></i></span>
+                                    <textarea class="form-control" id="message" name="message" rows="3" placeholder="Tell us about your partnership interest..." style="resize: none;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary w-100 btn-lg gradient-btn">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                Submit Partnership Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        .partner-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .gradient-btn {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+        }
+        
+        .input-group-text {
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border: 1px solid #ced4da;
+            border-right: none;
+        }
+        
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+        
+        .bg-gradient-primary {
+            background: linear-gradient(45deg, #007bff, #0056b3) !important;
+        }
+    </style>
+
     <!-- Custom JS -->
     <script src="assets/js/script.js"></script>
+    
+    <!-- Notification Toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="fas fa-check-circle me-2"></i>
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Your partnership request has been submitted successfully! We'll contact you shortly.
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    // Handle partner form submission
+    document.addEventListener('DOMContentLoaded', function() {
+        const partnerForm = document.getElementById('partnerForm');
+        const successToast = new bootstrap.Toast(document.getElementById('successToast'));
+        
+        if (partnerForm) {
+            partnerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Create FormData object
+                const formData = new FormData(this);
+                
+                // Show loading state
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Submitting...';
+                submitBtn.disabled = true;
+                
+                // Send AJAX request
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Show success toast
+                        successToast.show();
+                        
+                        // Reset form
+                        this.reset();
+                        
+                        // Close modal after 2 seconds
+                        setTimeout(() => {
+                            const modal = bootstrap.Modal.getInstance(document.getElementById('partnerModal'));
+                            if (modal) {
+                                modal.hide();
+                            }
+                        }, 2000);
+                    } else {
+                        // Show error message
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                })
+                .finally(() => {
+                    // Restore button state
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+            });
+        }
+        
+        // Check for success message in URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            successToast.show();
+        }
+    });
+    </script>
 
 </body>
 </html>

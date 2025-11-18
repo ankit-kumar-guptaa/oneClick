@@ -101,17 +101,24 @@
                             <h5 class="footer-title">Contact</h5>
                             <div class="contact-info">
                                 <div class="contact-item">
-                                    <i class="fas fa-phone"></i>
+                                    <i class="fas fa-phone vibrate-icon"></i>
                                     <div>
                                         <strong>Call Us</strong>
-                                        <p>1800-123-4567</p>
+                                        <p><a href="tel:+919319165103" class="click-to-call">9319165103</a></p>
                                     </div>
                                 </div>
                                 <div class="contact-item">
                                     <i class="fas fa-envelope"></i>
                                     <div>
                                         <strong>Email Us</strong>
-                                        <p>support@oneclickinsurance.com</p>
+                                        <p><a href="mailto:support@oneclickinsurance.com" class="click-to-email">support@oneclickinsurance.com</a></p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fab fa-whatsapp vibrate-icon whatsapp-icon"></i>
+                                    <div>
+                                        <strong>WhatsApp</strong>
+                                        <p><a href="https://wa.me/919319165103" target="_blank" class="click-to-whatsapp">9319165103</a></p>
                                     </div>
                                 </div>
                                 <div class="contact-item">
@@ -163,3 +170,115 @@
             </div>
         </div>
     </footer>
+    
+    <style>
+        /* Vibrating icons animation */
+        .vibrate-icon {
+            animation: vibrate 2s infinite;
+            color: #25D366; /* WhatsApp green for WhatsApp icon */
+        }
+        
+        .fa-phone.vibrate-icon {
+            color: #007bff; /* Blue for phone icon */
+        }
+        
+        .whatsapp-icon {
+            color: #25D366 !important;
+        }
+        
+        @keyframes vibrate {
+            0%, 20%, 40%, 60%, 80% {
+                transform: translateX(0) rotate(0);
+            }
+            10%, 30%, 50%, 70%, 90% {
+                transform: translateX(-2px) rotate(-2deg);
+            }
+        }
+        
+        /* Clickable contact links styling */
+        .click-to-call,
+        .click-to-email,
+        .click-to-whatsapp {
+            color: #007bff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .click-to-call:hover,
+        .click-to-email:hover,
+        .click-to-whatsapp:hover {
+            color: #0056b3;
+            text-decoration: underline;
+            transform: scale(1.05);
+        }
+        
+        .click-to-whatsapp {
+            color: #25D366;
+        }
+        
+        .click-to-whatsapp:hover {
+            color: #128C7E;
+        }
+        
+        /* Fixed position floating icons */
+        .floating-contact-icons {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .floating-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .floating-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .floating-call {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+        }
+        
+        .floating-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+    
+    <!-- Floating Contact Icons -->
+    <div class="floating-contact-icons">
+        <a href="tel:+919319165103" class="floating-icon floating-call">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="https://wa.me/919319165103" target="_blank" class="floating-icon floating-whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>

@@ -981,6 +981,64 @@
     .hero-enquiry-form {
         margin-top: 30px;
     }
+    
+    /* Hero Section Mobile Responsive */
+    .oneclick-hero-section.bg-white {
+        height: auto;
+        padding: 15px 0;
+    }
+    
+    .oneclick-hero-title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    
+    .oneclick-hero-subtitle {
+        font-size: 0.9rem;
+        text-align: center;
+        margin: 0 auto 15px;
+    }
+    
+    .oneclick-hero-actions {
+        justify-content: center;
+        gap: 12px;
+    }
+    
+    .oneclick-btn-large {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    /* Make image slider appear on top in mobile */
+    .oneclick-hero-section .row {
+        flex-direction: column-reverse;
+    }
+    
+    .oneclick-hero-slider {
+        margin-bottom: 30px;
+    }
+    
+    .heroSwiper {
+        height: 200px;
+        border-radius: 12px;
+    }
+    
+    .oneclick-slider-card {
+        height: 200px;
+    }
+    
+    .oneclick-slider-card img {
+        object-fit: cover;
+    }
+    
+    .oneclick-hero-content {
+        text-align: center;
+        padding: 0 15px;
+    }
+    
+    .oneclick-hero-badge {
+        margin: 0 auto 15px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -998,6 +1056,34 @@
     
     .product-title {
         font-size: 10px;
+    }
+    
+    /* Extra small devices */
+    .oneclick-hero-title {
+        font-size: 1.5rem;
+    }
+    
+    .oneclick-hero-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .oneclick-hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .oneclick-btn-large {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+    
+    .heroSwiper {
+        height: 180px;
+    }
+    
+    .oneclick-slider-card {
+        height: 180px;
     }
 }
 

@@ -4,7 +4,7 @@
     <header class="oneclick-header">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand oneclick-brand" href="index.php">
+                <a class="navbar-brand oneclick-brand" href="/">
                     <div class="brand-logo">
                         <img src="assets/img/logo.jpg" style="width: 160px;" alt="OneClick Insurance" class="brand-logo-image">
                     </div>
@@ -17,7 +17,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php">
+                            <a class="nav-link" href="/">
                                 <i class="fas fa-home"></i>
                                 Home
                             </a>
@@ -188,12 +188,10 @@
                     </ul>
 
                     <div class="header-actions">
-                        <a href="#" class="btn oneclick-btn-signin me-2" id="signInBtn">
+                        <a href="/signin" class="btn oneclick-btn-signin me-2">
                             <i class="fas fa-user"></i>
                             Sign In
                         </a>
-                        
-                        <!-- Sign In Popup Form -->
 
                         <button class="btn oneclick-btn-primary">
                             <i class="fas fa-search"></i>

@@ -1,8 +1,53 @@
 <?php
-session_start();
+// Use safe session handler instead of direct session_start()
+require_once 'includes/session-handler.php';
 require_once 'includes/config.php';
-require_once 'routes/web.php';
 require_once 'includes/visitor-tracker.php';
+
+// Simple Routing System
+$request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$base_path = '/OneClick Insurance/';
+
+// Remove base path from request URI
+$route = str_replace($base_path, '', $request_uri);
+$route = trim($route, '/');
+
+// Handle query parameter routing (from .htaccess)
+if (empty($route) && isset($_GET['route'])) {
+    $route = trim($_GET['route'], '/');
+}
+
+// If route is empty, show homepage
+if (empty($route)) {
+    // Continue with normal homepage display
+} else {
+    // Check if the requested route corresponds to a PHP file
+    $possible_files = [
+        $route . '.php',
+        str_replace('-', '_', $route) . '.php',
+        'pages/' . $route . '.php',
+        'pages/' . str_replace('-', '_', $route) . '.php'
+    ];
+    
+    $file_found = false;
+    
+    foreach ($possible_files as $file) {
+        if (file_exists($file)) {
+            // Include the file without starting session again
+            include $file;
+            $file_found = true;
+            exit();
+        }
+    }
+    
+    // If no file found, show 404
+    if (!$file_found) {
+        header("HTTP/1.0 404 Not Found");
+        // Include professional 404 page
+        include '404.php';
+        exit();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,16 +192,12 @@ require_once 'includes/visitor-tracker.php';
        <!-- Insurance Products Section - Clickable Cards -->
 <section class="oneclick-products-section py-5">
     <div class="container">
-        <!-- <div class="row">
-            <div class="col-12 text-center mb-5">
-                <h2 class="products-main-title">Insurance Products</h2>
-            </div>
-        </div> -->
+      
         
         <div class="row g-3">
             <!-- Term Life Insurance -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="term-life-insurance.php" class="product-card-link">
+                <a href="/term-life-insurance" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">Lowest Price</div>
                         <div class="product-icon-box purple-icon">
@@ -169,7 +210,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Health Insurance -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="health-insurance.php" class="product-card-link">
+                <a href="/health-insurance" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">FREE Home Visit</div>
                         <div class="product-icon-box red-icon">
@@ -182,7 +223,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Investment Plans -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="investment-plans.php" class="product-card-link">
+                <a href="/investment-plans" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">Life Cover</div>
                         <div class="product-icon-box yellow-icon">
@@ -195,7 +236,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Car Insurance -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="car-insurance.php" class="product-card-link">
+                <a href="/car-insurance" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge blue-badge">91% Discount</div>
                         <div class="product-icon-box gray-icon">
@@ -208,7 +249,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Bike Insurance -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="bike-insurance.php" class="product-card-link">
+                <a href="/bike-insurance" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge blue-badge">85% Discount</div>
                         <div class="product-icon-box green-icon">
@@ -221,7 +262,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Family Health -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="family-health-insurance.php" class="product-card-link">
+                <a href="/family-health-insurance" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">25% Discount</div>
                         <div class="product-icon-box orange-icon">
@@ -234,7 +275,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Travel Insurance -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="travel-insurance.php" class="product-card-link">
+                <a href="/travel-insurance" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-icon-box blue-icon">
                             <i class="fas fa-plane"></i>
@@ -246,7 +287,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Term Women -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="term-insurance-women.php" class="product-card-link">
+                <a href="/term-insurance-women" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">20% Cheaper</div>
                         <div class="product-icon-box pink-icon">
@@ -259,7 +300,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Return Premium -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="return-premium-plans.php" class="product-card-link">
+                <a href="/return-premium-plans" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-icon-box teal-icon">
                             <i class="fas fa-undo-alt"></i>
@@ -271,7 +312,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Guaranteed Returns -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="guaranteed-return-plans.php" class="product-card-link">
+                <a href="/guaranteed-return-plans" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-icon-box gold-icon">
                             <i class="fas fa-hand-holding-usd"></i>
@@ -283,7 +324,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Child Plans -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="child-savings-plans.php" class="product-card-link">
+                <a href="/child-savings-plans" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge pink-badge">Premium Waiver</div>
                         <div class="product-icon-box sky-icon">
@@ -296,7 +337,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Retirement -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="retirement-plans.php" class="product-card-link">
+                <a href="/retirement-plans" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-icon-box indigo-icon">
                             <i class="fas fa-user-clock"></i>
@@ -308,7 +349,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Group Health -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="group-health-insurance.php" class="product-card-link">
+                <a href="/group-health-insurance" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">65% Discount</div>
                         <div class="product-icon-box cyan-icon">
@@ -321,7 +362,7 @@ require_once 'includes/visitor-tracker.php';
             
             <!-- Home Insurance -->
             <div class="col-lg-2 col-md-4 col-6">
-                <a href="home-insurance.php" class="product-card-link">
+                <a href="/home-insurance" class="product-card-link">
                     <div class="oci-product-card">
                         <div class="product-badge green-badge">25% Discount</div>
                         <div class="product-icon-box violet-icon">

@@ -364,8 +364,8 @@
     font-size: 14px;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
     margin-bottom: 20px;
-    transform: translateY(0);
-    animation: float 3s ease-in-out infinite;
+    /* transform: translateY(0);
+    animation: float 3s ease-in-out infinite; */
 }
 
 @keyframes float {

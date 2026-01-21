@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chain Profit Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #64748b;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            color: var(--text-primary);
+        }
+
+        .container-fluid-custom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .header {
+            background: var(--card-bg);
+            padding: 20px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .post-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            height: 100%;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .post-header {
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .im1-header { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .im2-header { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+        .im3-header { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .im4-header { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .im5-header { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            background-color: #f8fafc;
+        }
+
+        .form-control:focus {
+            background-color: #fff;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 0.9rem;
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+        }
+
+        .result-val {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .btn-action {
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-calc {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+        }
+
+        .btn-calc:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px -1px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-rst {
+            background: white;
+            color: var(--text-secondary);
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-rst:hover {
+            background: #f1f5f9;
+            color: var(--text-primary);
+        }
+
+        .summary-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .summary-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+        
+        .summary-item:hover {
+            transform: translateY(-3px);
+            border-color: #cbd5e1;
+        }
+
+        .summary-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .summary-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .summary-item.highlight {
+            background: #eef2ff;
+            border-color: #c7d2fe;
+        }
+        .summary-item.highlight .summary-value { color: var(--primary-color); }
+
+        .summary-item.profit {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+        }
+        .summary-item.profit .summary-value { color: var(--success-color); }
+
+        .summary-item.loss {
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+        .summary-item.loss .summary-value { color: var(--danger-color); }
+
+        /* Custom 5-column grid for XL screens and above (standard laptops) */
+        @media (min-width: 1200px) {
+            .col-xl-custom-5 {
+                flex: 0 0 auto;
+                width: 20%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid-custom">
+        <!-- Header -->
+        <div class="header">
+            <div>
+                <h1><i class="fas fa-link"></i> Chain Profit Calculator</h1>
+                <p>Advanced multi-level business distribution tracker (IM1 - IM5)</p>
+            </div>
+            <a href="profit_calculator.html" class="btn btn-outline-secondary rounded-pill px-4">
+                <i class="fas fa-arrow-left me-2"></i> Back to Standard
+            </a>
+        </div>
+
+        <!-- Posts Section: 5 in a row -->
+        <div class="row g-4">
+            <!-- IM1 -->
+            <div class="col-12 col-md-6 col-lg-4 col-xl-custom-5">
+                <div class="post-card">
+                    <div class="post-header im1-header">
+                        <i class="fas fa-user-circle"></i> IM1 Post
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Business Amount (₹)</label>
+                        <input type="number" class="form-control" id="im1-business" placeholder="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Percentage Given (%)</label>
+                        <input type="number" class="form-control" id="im1-percentage" placeholder="0" step="0.01">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Salary (₹)</label>
+                        <input type="number" class="form-control" id="im1-salary" placeholder="0">
+                    </div>
+                    <div class="mt-4 pt-3 border-top">
+                        <div class="result-row">
+                            <span class="result-label">Amount Given</span>
+                            <span class="result-val" id="im1-amount-given">₹0</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Total Cost</span>
+                            <span class="result-val" id="im1-total-cost">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IM2 -->
+            <div class="col-12 col-md-6 col-lg-4 col-xl-custom-5">
+                <div class="post-card">
+                    <div class="post-header im2-header">
+                        <i class="fas fa-user-friends"></i> IM2 Post
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Business Amount (₹)</label>
+                        <input type="number" class="form-control" id="im2-business" placeholder="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Percentage Given (%)</label>
+                        <input type="number" class="form-control" id="im2-percentage" placeholder="0" step="0.01">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Salary (₹)</label>
+                        <input type="number" class="form-control" id="im2-salary" placeholder="0">
+                    </div>
+                    <div class="mt-4 pt-3 border-top">
+                        <div class="result-row">
+                            <span class="result-label">Amount Given</span>
+                            <span class="result-val" id="im2-amount-given">₹0</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Total Cost</span>
+                            <span class="result-val" id="im2-total-cost">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IM3 -->
+            <div class="col-12 col-md-6 col-lg-4 col-xl-custom-5">
+                <div class="post-card">
+                    <div class="post-header im3-header">
+                        <i class="fas fa-users"></i> IM3 Post
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Business Amount (₹)</label>
+                        <input type="number" class="form-control" id="im3-business" placeholder="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Percentage Given (%)</label>
+                        <input type="number" class="form-control" id="im3-percentage" placeholder="0" step="0.01">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Salary (₹)</label>
+                        <input type="number" class="form-control" id="im3-salary" placeholder="0">
+                    </div>
+                    <div class="mt-4 pt-3 border-top">
+                        <div class="result-row">
+                            <span class="result-label">Amount Given</span>
+                            <span class="result-val" id="im3-amount-given">₹0</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Total Cost</span>
+                            <span class="result-val" id="im3-total-cost">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IM4 -->
+            <div class="col-12 col-md-6 col-lg-4 col-xl-custom-5">
+                <div class="post-card">
+                    <div class="post-header im4-header">
+                        <i class="fas fa-user-tie"></i> IM4 Post
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Business Amount (₹)</label>
+                        <input type="number" class="form-control" id="im4-business" placeholder="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Percentage Given (%)</label>
+                        <input type="number" class="form-control" id="im4-percentage" placeholder="0" step="0.01">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Salary (₹)</label>
+                        <input type="number" class="form-control" id="im4-salary" placeholder="0">
+                    </div>
+                    <div class="mt-4 pt-3 border-top">
+                        <div class="result-row">
+                            <span class="result-label">Amount Given</span>
+                            <span class="result-val" id="im4-amount-given">₹0</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Total Cost</span>
+                            <span class="result-val" id="im4-total-cost">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IM5 -->
+            <div class="col-12 col-md-6 col-lg-4 col-xl-custom-5">
+                <div class="post-card">
+                    <div class="post-header im5-header">
+                        <i class="fas fa-user-shield"></i> IM5 Post
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Business Amount (₹)</label>
+                        <input type="number" class="form-control" id="im5-business" placeholder="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Percentage Given (%)</label>
+                        <input type="number" class="form-control" id="im5-percentage" placeholder="0" step="0.01">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Salary (₹)</label>
+                        <input type="number" class="form-control" id="im5-salary" placeholder="0">
+                    </div>
+                    <div class="mt-4 pt-3 border-top">
+                        <div class="result-row">
+                            <span class="result-label">Amount Given</span>
+                            <span class="result-val" id="im5-amount-given">₹0</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Total Cost</span>
+                            <span class="result-val" id="im5-total-cost">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="text-center my-5">
+            <button class="btn-action btn-calc me-3" onclick="calculateProfit()">
+                <i class="fas fa-calculator"></i> Calculate Profit
+            </button>
+            <button class="btn-action btn-rst" onclick="resetAll()">
+                <i class="fas fa-redo"></i> Reset Form
+            </button>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary-section">
+            <h4 class="text-center mb-4" style="font-weight: 700; color: var(--text-primary);">Financial Summary</h4>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-label">Total Business</div>
+                    <div class="summary-value" id="total-business">₹0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Total Given</div>
+                    <div class="summary-value" id="total-percentage-given">₹0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Total Salary</div>
+                    <div class="summary-value" id="total-salary">₹0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Total Cost</div>
+                    <div class="summary-value" id="total-cost">₹0</div>
+                </div>
+                <div class="summary-item highlight">
+                    <div class="summary-label">Business % Input</div>
+                    <input type="number" class="form-control text-center mx-auto" id="business-percentage" placeholder="0%" step="0.01" style="max-width: 120px; font-weight: 700; color: var(--primary-color);">
+                </div>
+                <div class="summary-item highlight">
+                    <div class="summary-label">Highest Payout</div>
+                    <div class="summary-value" id="highest-payout">₹0</div>
+                </div>
+                <div class="summary-item" id="company-profit-card">
+                    <div class="summary-label">Company Profit</div>
+                    <div class="summary-value" id="company-profit">₹0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function formatCurrency(amount) {
+            return '₹' + amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function calculatePost(prefix) {
+            const business = parseFloat(document.getElementById(`${prefix}-business`).value) || 0;
+            const percentage = parseFloat(document.getElementById(`${prefix}-percentage`).value) || 0;
+            const salary = parseFloat(document.getElementById(`${prefix}-salary`).value) || 0;
+
+            const amountGiven = (business * percentage) / 100;
+            const totalCost = amountGiven + salary;
+
+            document.getElementById(`${prefix}-amount-given`).textContent = formatCurrency(amountGiven);
+            document.getElementById(`${prefix}-total-cost`).textContent = formatCurrency(totalCost);
+
+            return {
+                business: business,
+                amountGiven: amountGiven,
+                salary: salary,
+                totalCost: totalCost
+            };
+        }
+
+        function calculateProfit() {
+            let totalBusiness = 0;
+            let totalPercentageGiven = 0;
+            let totalSalary = 0;
+            let totalCost = 0;
+
+            for (let i = 1; i <= 5; i++) {
+                const data = calculatePost('im' + i);
+                totalBusiness += data.business;
+                totalPercentageGiven += data.amountGiven;
+                totalSalary += data.salary;
+                totalCost += data.totalCost;
+            }
+
+            const businessPercentage = parseFloat(document.getElementById('business-percentage').value) || 0;
+            const highestPayout = (totalBusiness * businessPercentage) / 100;
+            const companyProfit = highestPayout > 0 ? highestPayout - totalCost : 0;
+
+            document.getElementById('total-business').textContent = formatCurrency(totalBusiness);
+            document.getElementById('total-percentage-given').textContent = formatCurrency(totalPercentageGiven);
+            document.getElementById('total-salary').textContent = formatCurrency(totalSalary);
+            document.getElementById('total-cost').textContent = formatCurrency(totalCost);
+            document.getElementById('highest-payout').textContent = formatCurrency(highestPayout);
+            document.getElementById('company-profit').textContent = formatCurrency(companyProfit);
+
+            const profitCard = document.getElementById('company-profit-card');
+            if (profitCard) {
+                profitCard.classList.remove('profit', 'loss');
+                if (companyProfit > 0) {
+                    profitCard.classList.add('profit');
+                } else if (companyProfit < 0) {
+                    profitCard.classList.add('loss');
+                }
+            }
+        }
+
+        function resetAll() {
+            document.querySelectorAll('.form-control').forEach(input => input.value = '');
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`im${i}-amount-given`).textContent = '₹0';
+                document.getElementById(`im${i}-total-cost`).textContent = '₹0';
+            }
+            document.getElementById('total-business').textContent = '₹0';
+            document.getElementById('total-percentage-given').textContent = '₹0';
+            document.getElementById('total-salary').textContent = '₹0';
+            document.getElementById('total-cost').textContent = '₹0';
+            document.getElementById('highest-payout').textContent = '₹0';
+            document.getElementById('company-profit').textContent = '₹0';
+            const profitCard = document.getElementById('company-profit-card');
+            if (profitCard) profitCard.classList.remove('profit', 'loss');
+        }
+
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('input', calculateProfit);
+        });
+    </script>
+</body>
+</html>

@@ -125,7 +125,7 @@
                                     <i class="fas fa-map-marker-alt"></i>
                                     <div>
                                         <strong>Office</strong>
-                                        <p>Mumbai, Maharashtra</p>
+                                        <p>S-15, second floor master complex, sector 5 Harola Noida 201301</p>
                                     </div>
                                 </div>
                             </div>

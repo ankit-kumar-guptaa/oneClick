@@ -3,10 +3,14 @@
  * Admin Logout
  */
 
-// Start session if not already started
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+// Include security functions
+require_once '../includes/security.php';
+
+// Set security headers
+set_security_headers();
+
+// Configure secure session
+secure_session_config();
 
 // Unset all session variables
 $_SESSION = array();

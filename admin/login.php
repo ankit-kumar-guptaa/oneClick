@@ -8,8 +8,15 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include database connection
+// Include database connection and security functions
 require_once '../includes/database.php';
+require_once '../includes/security.php';
+
+// Set security headers
+set_security_headers();
+
+// Configure secure session
+secure_session_config();
 
 // Check if user is already logged in
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
@@ -23,44 +30,69 @@ $username = '';
 
 // Process login form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Create database connection
-    $db = new Database();
-    $conn = $db->getConnection();
-    
-    // Get form data and sanitize
-    $username = $db->escapeString(trim($_POST['username'] ?? ''));
-    $password = trim($_POST['password'] ?? '');
-    
-    // Validate form data
-    if (empty($username) || empty($password)) {
-            $error = 'Please enter both username and password';
-        } else {
-        // Check user credentials
-        $sql = "SELECT id, username, password FROM users WHERE username = '$username' AND role = 'admin'";
-        $result = $conn->query($sql);
+    // Validate CSRF token
+    if (!isset($_POST['csrf_token']) || !validate_csrf_token($_POST['csrf_token'])) {
+        $error = 'Security token invalid or expired. Please refresh the page and try again.';
+    } else {
+        // Create database connection
+        $db = new Database();
+        $conn = $db->getConnection();
         
-        if ($result->num_rows === 1) {
-            $user = $result->fetch_assoc();
-            
-            // Verify password
-            if (password_verify($password, $user['password'])) {
-                // Set session variables
-                $_SESSION['admin_logged_in'] = true;
-                $_SESSION['admin_id'] = $user['id'];
-                $_SESSION['admin_username'] = $user['username'];
-                
-                // Update last login time
-                // $updateSql = "UPDATE users SET last_login = NOW() WHERE id = " . $user['id'];
-                // $conn->query($updateSql);
-                
-                // Redirect to admin dashboard
-                header('Location: index.php');
-                exit;
+        // Get form data and sanitize
+        $username = sanitize_input(trim($_POST['username'] ?? ''));
+        $password = trim($_POST['password'] ?? '');
+        
+        // Validate form data
+        if (empty($username) || empty($password)) {
+                $error = 'Please enter both username and password';
             } else {
-                $error = 'Invalid username or password';
+            // Check user credentials using prepared statement
+            $sql = "SELECT id, username, password FROM users WHERE username = ? AND role = 'admin' LIMIT 1";
+            $stmt = $conn->prepare($sql);
+            
+            if ($stmt) {
+                $stmt->bind_param('s', $username);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                
+                if ($result->num_rows === 1) {
+                    $user = $result->fetch_assoc();
+                    
+                    // Verify password
+                    if (password_verify($password, $user['password'])) {
+                        // Set session variables
+                        $_SESSION['admin_logged_in'] = true;
+                        $_SESSION['admin_id'] = $user['id'];
+                        $_SESSION['admin_username'] = $user['username'];
+                        $_SESSION['last_activity'] = time();
+                
+                        // Update last login time
+                        $updateSql = "UPDATE users SET last_login = NOW() WHERE id = ?";
+                        $updateStmt = $conn->prepare($updateSql);
+                        if ($updateStmt) {
+                            $updateStmt->bind_param('i', $user['id']);
+                            $updateStmt->execute();
+                            $updateStmt->close();
+                        }
+                        
+                        // Close statements
+                        $stmt->close();
+                        
+                        // Redirect to admin dashboard
+                        header('Location: index.php');
+                        exit;
+                    } else {
+                        $error = 'Invalid username or password';
+                    }
+                } else {
+                    $error = 'Invalid username or password';
+                }
+                
+                // Close statement
+                $stmt->close();
+            } else {
+                $error = 'Database error. Please try again.';
             }
-        } else {
-            $error = 'Invalid username or password';
         }
     }
     
@@ -171,9 +203,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 <?php endif; ?>
                 
-                <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                <!-- Login Form -->
+                <form action="login.php" method="POST" class="needs-validation" novalidate>
+                    <!-- CSRF Token -->
+                    <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
+                    
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
+                        <label for="username" class="form-label"><i class="fas fa-user me-2"></i>Username</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                             <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" required>

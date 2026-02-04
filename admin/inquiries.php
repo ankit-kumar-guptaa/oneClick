@@ -1,10 +1,18 @@
 <?php
-session_start();
+// Include security functions
+require_once '../includes/security.php';
+
+// Set security headers
+set_security_headers();
+
+// Configure secure session
+secure_session_config();
+
 require_once '../includes/config.php';
 require_once '../includes/database.php';
 
-// Check if user is logged in as admin
-if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+// Check if user is authenticated
+if (!is_authenticated()) {
     header("Location: login.php");
     exit();
 }

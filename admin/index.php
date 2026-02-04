@@ -1,6 +1,15 @@
 <?php
-session_start();
-if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+// Include security functions
+require_once '../includes/security.php';
+
+// Set security headers
+set_security_headers();
+
+// Configure secure session
+secure_session_config();
+
+// Check if user is authenticated
+if (!is_authenticated()) {
     header('Location: login.php');
     exit;
 }

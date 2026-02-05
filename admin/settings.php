@@ -2,11 +2,11 @@
 // Include security functions
 require_once '../includes/security.php';
 
+// Configure secure session FIRST (before any output)
+secure_session_config();
+
 // Set security headers
 set_security_headers();
-
-// Configure secure session
-secure_session_config();
 
 require_once '../includes/config.php';
 require_once '../includes/database.php';

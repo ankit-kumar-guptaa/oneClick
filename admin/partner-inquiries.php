@@ -4,11 +4,11 @@ require_once '../includes/security.php';
 require_once '../includes/config.php';
 require_once '../includes/database.php';
 
+// Configure secure session FIRST (before any output)
+secure_session_config();
+
 // Set security headers
 set_security_headers();
-
-// Configure secure session
-secure_session_config();
 
 // Check if user is authenticated with session ownership validation
 if (!is_authenticated_secure()) {

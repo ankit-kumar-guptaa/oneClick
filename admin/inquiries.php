@@ -11,8 +11,8 @@ secure_session_config();
 require_once '../includes/config.php';
 require_once '../includes/database.php';
 
-// Check if user is authenticated
-if (!is_authenticated()) {
+// Check if user is authenticated with session ownership validation
+if (!is_authenticated_secure()) {
     header("Location: login.php");
     exit();
 }
@@ -23,15 +23,20 @@ $conn = $db->getConnection();
 
 // Handle inquiry status update
 if (isset($_POST['action']) && $_POST['action'] == 'update_status') {
-    $inquiry_id = $conn->real_escape_string($_POST['inquiry_id']);
-    $status = $conn->real_escape_string($_POST['status']);
+    // Validate CSRF token
+    if (!isset($_POST['csrf_token']) || !validate_csrf_token($_POST['csrf_token'])) {
+        $error_message = 'Security token invalid or expired. Please refresh the page and try again.';
+    } else {
+        $inquiry_id = $conn->real_escape_string($_POST['inquiry_id']);
+        $status = $conn->real_escape_string($_POST['status']);
     
     $updateSql = "UPDATE enquiries SET status = '$status', updated_at = NOW() WHERE id = $inquiry_id";
     $conn->query($updateSql);
     
-    // Redirect to prevent form resubmission
-    header("Location: inquiries.php?status_updated=1");
-    exit();
+        // Redirect to prevent form resubmission
+        header("Location: inquiries.php?status_updated=1");
+        exit();
+    }
 }
 
 // Handle inquiry deletion
@@ -219,6 +224,8 @@ $result = $conn->query($sql);
                                                 </td>
                                                 <td>
                                                     <form method="post" action="inquiries.php" class="status-form">
+                                                        <!-- CSRF Token -->
+                                                        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                                         <input type="hidden" name="action" value="update_status">
                                                         <input type="hidden" name="inquiry_id" value="<?php echo $row['id']; ?>">
                                                         <select name="status" class="form-select form-select-sm status-select" onchange="this.form.submit()">

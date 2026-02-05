@@ -65,7 +65,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $_SESSION['admin_id'] = $user['id'];
                         $_SESSION['admin_username'] = $user['username'];
                         $_SESSION['last_activity'] = time();
-                
+                        
+                        // Track session to prevent multiple logins
+                        track_user_session($user['id']);
+                        
                         // Update last login time
                         $updateSql = "UPDATE users SET last_login = NOW() WHERE id = ?";
                         $updateStmt = $conn->prepare($updateSql);

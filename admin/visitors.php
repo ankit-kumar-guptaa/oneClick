@@ -8,8 +8,8 @@ set_security_headers();
 // Configure secure session
 secure_session_config();
 
-// Check if user is authenticated
-if (!is_authenticated()) {
+// Check if user is authenticated with session ownership validation
+if (!is_authenticated_secure()) {
     header('Location: login.php');
     exit;
 }

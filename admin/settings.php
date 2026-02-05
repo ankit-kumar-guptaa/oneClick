@@ -11,8 +11,8 @@ secure_session_config();
 require_once '../includes/config.php';
 require_once '../includes/database.php';
 
-// Check if user is authenticated
-if (!is_authenticated()) {
+// Check if user is authenticated with session ownership validation
+if (!is_authenticated_secure()) {
     header('Location: login.php');
     exit;
 }
@@ -23,9 +23,13 @@ $conn = $db->getConnection();
 
 // Handle form submission for general settings
 if (isset($_POST['update_general_settings'])) {
-    $site_title = $conn->real_escape_string($_POST['site_title']);
-    $site_email = $conn->real_escape_string($_POST['site_email']);
-    $contact_phone = $conn->real_escape_string($_POST['contact_phone']);
+    // Validate CSRF token
+    if (!isset($_POST['csrf_token']) || !validate_csrf_token($_POST['csrf_token'])) {
+        $error_message = 'Security token invalid or expired. Please refresh the page and try again.';
+    } else {
+        $site_title = $conn->real_escape_string($_POST['site_title']);
+        $site_email = $conn->real_escape_string($_POST['site_email']);
+        $contact_phone = $conn->real_escape_string($_POST['contact_phone']);
     $contact_address = $conn->real_escape_string($_POST['contact_address']);
     
     // Check if settings table exists, if not create it
@@ -54,14 +58,19 @@ if (isset($_POST['update_general_settings'])) {
         $stmt->close();
     }
     
-    $success_message = "General settings updated successfully!";
+        $success_message = "General settings updated successfully!";
+    }
 }
 
 // Handle password change
 if (isset($_POST['change_password'])) {
-    $current_password = $_POST['current_password'];
-    $new_password = $_POST['new_password'];
-    $confirm_password = $_POST['confirm_password'];
+    // Validate CSRF token
+    if (!isset($_POST['csrf_token']) || !validate_csrf_token($_POST['csrf_token'])) {
+        $error_message = 'Security token invalid or expired. Please refresh the page and try again.';
+    } else {
+        $current_password = $_POST['current_password'];
+        $new_password = $_POST['new_password'];
+        $confirm_password = $_POST['confirm_password'];
     
     // Validate input
     if (empty($current_password) || empty($new_password) || empty($confirm_password)) {
@@ -92,6 +101,7 @@ if (isset($_POST['change_password'])) {
         } else {
             $password_error = "Current password is incorrect";
         }
+    }
     }
 }
 
@@ -177,6 +187,9 @@ $settings = [
                                 <?php endif; ?>
                                 
                                 <form method="post" action="">
+                                    <!-- CSRF Token -->
+                                    <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
+                                    
                                     <div class="mb-3">
                                         <label for="site_title" class="form-label">Site Title</label>
                                         <input type="text" class="form-control" id="site_title" name="site_title" value="<?php echo htmlspecialchars($settings['site_title'] ?? 'OneClick Insurance'); ?>">
@@ -221,6 +234,9 @@ $settings = [
                                 <?php endif; ?>
                                 
                                 <form method="post" action="">
+                                    <!-- CSRF Token -->
+                                    <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
+                                    
                                     <div class="mb-3">
                                         <label for="current_password" class="form-label">Current Password</label>
                                         <input type="password" class="form-control" id="current_password" name="current_password" required>

@@ -128,12 +128,27 @@ class Database {
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )";
 
+        // Create sessions table for tracking active sessions
+        $sessionsTable = "CREATE TABLE IF NOT EXISTS sessions (
+            id INT(11) AUTO_INCREMENT PRIMARY KEY,
+            user_id INT(11) NOT NULL,
+            session_id VARCHAR(255) NOT NULL UNIQUE,
+            ip_address VARCHAR(45) NOT NULL,
+            user_agent TEXT,
+            last_activity TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+            INDEX idx_user_id (user_id),
+            INDEX idx_session_id (session_id)
+        )";
+
         // Execute table creation queries
         $this->conn->query($userTable);
         $this->conn->query($enquiryTable);
         $this->conn->query($visitorTable);
         $this->conn->query($visitorStatsTable);
         $this->conn->query($enquiryNotesTable);
+        $this->conn->query($sessionsTable);
         
         // Create default admin user
         $this->createDefaultAdmin();

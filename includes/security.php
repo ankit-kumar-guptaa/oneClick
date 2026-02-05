@@ -90,6 +90,117 @@ function is_authenticated() {
 }
 
 /**
+ * Track user session in database to prevent multiple logins
+ */
+function track_user_session($user_id) {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
+    require_once 'database.php';
+    $db = new Database();
+    $conn = $db->getConnection();
+    
+    // Get current session information
+    $session_id = session_id();
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+    $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+    
+    // Remove any existing sessions for this user
+    $deleteSql = "DELETE FROM sessions WHERE user_id = ?";
+    $stmt = $conn->prepare($deleteSql);
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $stmt->close();
+    
+    // Insert new session
+    $insertSql = "INSERT INTO sessions (user_id, session_id, ip_address, user_agent) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($insertSql);
+    $stmt->bind_param('isss', $user_id, $session_id, $ip_address, $user_agent);
+    $stmt->execute();
+    $stmt->close();
+    
+    // Store session ID in user session
+    $_SESSION['db_session_id'] = $session_id;
+    
+    $db->closeConnection();
+}
+
+/**
+ * Validate if session is still active (not logged in from another device)
+ */
+function validate_session_ownership() {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
+    if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+        return false;
+    }
+    
+    if (!isset($_SESSION['db_session_id'])) {
+        return false;
+    }
+    
+    require_once 'database.php';
+    $db = new Database();
+    $conn = $db->getConnection();
+    
+    $session_id = session_id();
+    $user_id = $_SESSION['admin_id'];
+    
+    // Check if session exists in database
+    $checkSql = "SELECT session_id FROM sessions WHERE user_id = ? AND session_id = ?";
+    $stmt = $conn->prepare($checkSql);
+    $stmt->bind_param('is', $user_id, $session_id);
+    $stmt->execute();
+    $stmt->store_result();
+    
+    $is_valid = $stmt->num_rows === 1;
+    
+    $stmt->close();
+    $db->closeConnection();
+    
+    return $is_valid;
+}
+
+/**
+ * Enhanced authentication check with session ownership validation
+ */
+function is_authenticated_secure() {
+    if (!is_authenticated()) {
+        return false;
+    }
+    
+    // Check if session is still owned by this user (not logged in from another device)
+    if (!validate_session_ownership()) {
+        // Session was taken over by another login
+        session_unset();
+        session_destroy();
+        return false;
+    }
+    
+    return true;
+}
+
+/**
+ * Logout user from all devices
+ */
+function logout_all_sessions($user_id) {
+    require_once 'database.php';
+    $db = new Database();
+    $conn = $db->getConnection();
+    
+    $deleteSql = "DELETE FROM sessions WHERE user_id = ?";
+    $stmt = $conn->prepare($deleteSql);
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $stmt->close();
+    
+    $db->closeConnection();
+}
+
+/**
  * Set security headers
  */
 function set_security_headers() {

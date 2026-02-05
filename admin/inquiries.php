@@ -1,14 +1,12 @@
 <?php
-// Start session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Include session manager
+require_once '../includes/session_manager.php';
 
-// Basic authentication check
-if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header("Location: login.php");
-    exit();
-}
+// Set admin session parameters
+set_admin_session_params();
+
+// Check if user is authenticated (dashboard style)
+check_admin_session();
 
 require_once '../includes/config.php';
 require_once '../includes/database.php';

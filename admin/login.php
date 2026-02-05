@@ -69,13 +69,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         // Track session to prevent multiple logins
                         track_user_session($user['id']);
                         
-                        // Update last login time
-                        $updateSql = "UPDATE users SET last_login = NOW() WHERE id = ?";
-                        $updateStmt = $conn->prepare($updateSql);
-                        if ($updateStmt) {
-                            $updateStmt->bind_param('i', $user['id']);
-                            $updateStmt->execute();
-                            $updateStmt->close();
+                        // Update last login time (with error handling)
+                        try {
+                            $updateSql = "UPDATE users SET last_login = NOW() WHERE id = ?";
+                            $updateStmt = $conn->prepare($updateSql);
+                            if ($updateStmt) {
+                                $updateStmt->bind_param('i', $user['id']);
+                                $updateStmt->execute();
+                                $updateStmt->close();
+                            }
+                        } catch (Exception $e) {
+                            // Log error but don't break login process
+                            error_log("Failed to update last login: " . $e->getMessage());
                         }
                         
                         // Close statements

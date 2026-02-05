@@ -46,12 +46,20 @@ function validate_csrf_token($token) {
  * Secure session configuration
  */
 function secure_session_config() {
-    // Set secure session parameters
-    ini_set('session.cookie_httponly', 1);
-    ini_set('session.cookie_secure', 1);
-    ini_set('session.cookie_samesite', 'Strict');
-    ini_set('session.use_strict_mode', 1);
-    ini_set('session.gc_maxlifetime', 1800); // 30 minutes
+    // Only set session ini settings if session is not already active
+    if (session_status() === PHP_SESSION_NONE) {
+        // Set secure session parameters
+        ini_set('session.cookie_httponly', 1);
+        ini_set('session.cookie_secure', 1);
+        ini_set('session.cookie_samesite', 'Strict');
+        ini_set('session.use_strict_mode', 1);
+        ini_set('session.gc_maxlifetime', 1800); // 30 minutes
+    }
+    
+    // Start session if not already started
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     
     // Regenerate session ID periodically
     if (!isset($_SESSION['last_regeneration'])) {

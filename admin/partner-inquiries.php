@@ -10,8 +10,12 @@ secure_session_config();
 // Set security headers
 set_security_headers();
 
-// Check if user is authenticated (temporary fix - disable session validation)
-if (!is_authenticated()) {
+// Basic authentication check
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: login.php");
     exit();
 }

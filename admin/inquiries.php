@@ -1,25 +1,17 @@
 <?php
-// Include security functions
-require_once '../includes/security.php';
-
-// Configure secure session FIRST (before any output)
-secure_session_config();
-
-// Set security headers
-set_security_headers();
-
-require_once '../includes/config.php';
-require_once '../includes/database.php';
-
-// Basic authentication check
+// Start session if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Basic authentication check
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: login.php");
     exit();
 }
+
+require_once '../includes/config.php';
+require_once '../includes/database.php';
 
 // Initialize database connection
 $db = new Database();

@@ -28,6 +28,11 @@ RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
     Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), fullscreen=(self)"
 </IfModule>
 
+# PHP session settings for HTTP Only cookies
+php_value session.cookie_httponly 1
+php_value session.cookie_secure 1
+php_value session.use_only_cookies 1
+
 # Enable compression
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json

@@ -11,6 +11,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // Include database connection
 require_once 'database.php';
+require_once 'recaptcha_config.php';
 
 // Initialize response array
 $response = [
@@ -35,6 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Validate form data
     $errors = [];
+    
+    // Validate reCAPTCHA
+    if (!isset($_POST['g-recaptcha-response']) || !validate_recaptcha($_POST['g-recaptcha-response'])) {
+        $errors[] = 'Security check failed. Please try again.';
+    }
     
     if (empty($fullName)) {
         $errors[] = 'Full name is required';

@@ -239,9 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     
                     <!-- reCAPTCHA -->
-                    <div class="mb-4">
-                        <?php echo render_recaptcha(); ?>
-                    </div>
+                    <?php echo render_recaptcha(); ?>
                     
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">Login</button>

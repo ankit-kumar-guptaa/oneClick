@@ -1,10 +1,10 @@
 <?php
 /**
  * reCAPTCHA Configuration for OneClick Insurance
- * Site Key: 6LemWGIsAAAAAMQ-p2uDqG-1E0yz_YGNurnT4hW0
- * Secret Key: 6LemWGIsAAAAAMtBEpzRiq-LyiQRpfuXEQRaXgfl
+ * Using reCAPTCHA v3 (Invisible)
  */
 
+// reCAPTCHA v3 Keys
 define('RECAPTCHA_SITE_KEY', '6LemWGIsAAAAAMQ-p2uDqG-1E0yz_YGNurnT4hW0');
 define('RECAPTCHA_SECRET_KEY', '6LemWGIsAAAAAMtBEpzRiq-LyiQRpfuXEQRaXgfl');
 define('RECAPTCHA_VERIFY_URL', 'https://www.google.com/recaptcha/api/siteverify');
@@ -12,7 +12,7 @@ define('RECAPTCHA_VERIFY_URL', 'https://www.google.com/recaptcha/api/siteverify'
 /**
  * Validate reCAPTCHA response
  * @param string $recaptchaResponse The reCAPTCHA response from the form
- * @return bool True if valid, false if invalid
+ * @return bool True if valid (score >= 0.5), false if invalid
  */
 function validate_recaptcha($recaptchaResponse) {
     if (empty($recaptchaResponse)) {
@@ -42,15 +42,24 @@ function validate_recaptcha($recaptchaResponse) {
     
     $response = json_decode($result, true);
     
-    return isset($response['success']) && $response['success'] === true;
+    // Check success and score (v3 returns score 0.0-1.0)
+    // We accept score >= 0.5 as human
+    if (isset($response['success']) && $response['success'] === true) {
+        if (isset($response['score']) && $response['score'] >= 0.5) {
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 /**
- * Render reCAPTCHA widget in forms
- * @return string HTML code for reCAPTCHA widget
+ * Render reCAPTCHA hidden input and script
+ * This replaces the v2 widget
+ * @return string HTML code for reCAPTCHA
  */
 function render_recaptcha() {
-    return '<div class="g-recaptcha" data-sitekey="' . RECAPTCHA_SITE_KEY . '"></div>';
+    return '<input type="hidden" name="g-recaptcha-response" class="g-recaptcha-response">';
 }
 
 /**
@@ -58,6 +67,31 @@ function render_recaptcha() {
  * @return string JavaScript include code
  */
 function recaptcha_script() {
-    return '<script src="https://www.google.com/recaptcha/api.js" async defer></script>';
+    $siteKey = RECAPTCHA_SITE_KEY;
+    return <<<HTML
+    <script src="https://www.google.com/recaptcha/api.js?render={$siteKey}"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        grecaptcha.ready(function() {
+            // Find all forms with reCAPTCHA response field
+            var inputs = document.querySelectorAll('.g-recaptcha-response');
+            inputs.forEach(function(input) {
+                grecaptcha.execute('{$siteKey}', {action: 'submit'}).then(function(token) {
+                    input.value = token;
+                });
+            });
+            
+            // Refresh token every 90 seconds (tokens expire after 2 mins)
+            setInterval(function() {
+                inputs.forEach(function(input) {
+                    grecaptcha.execute('{$siteKey}', {action: 'submit'}).then(function(token) {
+                        input.value = token;
+                    });
+                });
+            }, 90000);
+        });
+    });
+    </script>
+HTML;
 }
 ?>

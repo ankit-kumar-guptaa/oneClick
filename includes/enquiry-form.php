@@ -21,7 +21,7 @@
     <textarea name="message" class="ocm-input" rows="2" placeholder="Message (optional)"></textarea>
     
     <!-- reCAPTCHA -->
-    <div class="g-recaptcha" data-sitekey="6LemWGIsAAAAAMQ-p2uDqG-1E0yz_YGNurnT4hW0"></div>
+    <input type="hidden" name="g-recaptcha-response" class="g-recaptcha-response">
     
     <button type="submit" class="ocm-btn" id="ocmSubmitBtn">
       <span class="btn-text">Get Free Quote</span>

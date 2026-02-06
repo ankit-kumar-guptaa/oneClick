@@ -13,6 +13,8 @@ define('SITE_EMAIL', 'support@oneclickinsurer.com');
 // Security Configuration
 define('ENCRYPTION_KEY', 'your_unique_encryption_key_here');
 
+require_once __DIR__ . '/recaptcha_config.php';
+
 // Error Reporting (Set to 0 in production)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

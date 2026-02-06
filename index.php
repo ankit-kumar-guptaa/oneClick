@@ -2442,9 +2442,7 @@ if (empty($route)) {
                             </div>
                             
                             <!-- reCAPTCHA -->
-                            <div class="col-12">
-                                <div class="g-recaptcha" data-sitekey="6LemWGIsAAAAAMQ-p2uDqG-1E0yz_YGNurnT4hW0"></div>
-                            </div>
+                            <input type="hidden" name="g-recaptcha-response" class="g-recaptcha-response">
                         </div>
                         
                         <div class="mt-4">

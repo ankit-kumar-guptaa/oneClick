@@ -11,6 +11,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // Include database connection and PHPMailer
 require_once 'database.php';
+require_once 'recaptcha_config.php';
 require_once '../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -38,6 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['partner_form'])) {
     
     // Validate form data
     $errors = [];
+    
+    // Validate reCAPTCHA
+    if (!isset($_POST['g-recaptcha-response']) || !validate_recaptcha($_POST['g-recaptcha-response'])) {
+        $errors[] = 'Security check failed. Please try again.';
+    }
     
     if (empty($contactPerson)) {
         $errors[] = 'Contact person name is required';

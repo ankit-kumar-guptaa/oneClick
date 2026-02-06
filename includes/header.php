@@ -1,4 +1,10 @@
 <!-- Removed Top Bar -->
+<?php 
+// Ensure reCAPTCHA script is loaded
+if (function_exists('recaptcha_script')) {
+    echo recaptcha_script();
+}
+?>
 
     <!-- Modern Header -->
     <header class="oneclick-header">

@@ -11,6 +11,7 @@ if (session_status() == PHP_SESSION_NONE) {
 // Include database connection and security functions
 require_once '../includes/database.php';
 require_once '../includes/security.php';
+require_once '../includes/recaptcha_config.php';
 
 // Set security headers
 set_security_headers();
@@ -44,8 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Validate form data
         if (empty($username) || empty($password)) {
-                $error = 'Please enter both username and password';
-            } else {
+            $error = 'Please enter both username and password';
+        } elseif (!isset($_POST['g-recaptcha-response']) || !validate_recaptcha($_POST['g-recaptcha-response'])) {
+            $error = 'Please complete the reCAPTCHA verification';
+        } else {
             // Check user credentials using prepared statement
             $sql = "SELECT id, username, password FROM users WHERE username = ? AND role = 'admin' LIMIT 1";
             $stmt = $conn->prepare($sql);
@@ -120,6 +123,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- reCAPTCHA Script -->
+    <?php echo recaptcha_script(); ?>
     
     <style>
         :root {
@@ -230,6 +236,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
+                    </div>
+                    
+                    <!-- reCAPTCHA -->
+                    <div class="mb-4">
+                        <?php echo render_recaptcha(); ?>
                     </div>
                     
                     <div class="d-grid">

@@ -2440,6 +2440,11 @@ if (empty($route)) {
                                     <textarea class="form-control" id="message" name="message" rows="3" placeholder="Tell us about your partnership interest..." style="resize: none;"></textarea>
                                 </div>
                             </div>
+                            
+                            <!-- reCAPTCHA -->
+                            <div class="col-12">
+                                <div class="g-recaptcha" data-sitekey="6LemWGIsAAAAAMQ-p2uDqG-1E0yz_YGNurnT4hW0"></div>
+                            </div>
                         </div>
                         
                         <div class="mt-4">

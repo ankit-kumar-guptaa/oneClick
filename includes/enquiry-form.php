@@ -19,6 +19,10 @@
       <option value="other">Other</option>
     </select>
     <textarea name="message" class="ocm-input" rows="2" placeholder="Message (optional)"></textarea>
+    
+    <!-- reCAPTCHA -->
+    <div class="g-recaptcha" data-sitekey="6LemWGIsAAAAAMQ-p2uDqG-1E0yz_YGNurnT4hW0"></div>
+    
     <button type="submit" class="ocm-btn" id="ocmSubmitBtn">
       <span class="btn-text">Get Free Quote</span>
       <span class="btn-loader" style="display:none;"><i class="fas fa-spinner fa-spin"></i></span>

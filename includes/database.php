@@ -9,7 +9,7 @@ class Database {
     // private $password = "";
     // private $database = "oneclick";
     // private $conn;
-    private $host = "localhost";
+    private $host = "srv839.hstgr.io";
     private $username = "u511651506_oneclick";
     private $password = "Raja@123321@";
     private $database = "u511651506_oneclick";

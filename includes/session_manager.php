@@ -5,6 +5,23 @@
  */
 
 /**
+ * Set secure session parameters
+ * HTTP Only cookies and secure session settings
+ */
+function set_admin_session_params() {
+    // Setup session environment - HTTP Only cookies
+    ini_set('session.cookie_httponly', 1);
+    ini_set('session.use_only_cookies', 1);
+    ini_set('session.cookie_secure', 1);
+    ini_set('session.cookie_samesite', 'Strict');
+    
+    // Start session if not already started
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+}
+
+/**
  * Check if user is authenticated (dashboard style)
  * Allows multiple sessions but shows warning if another device is active
  */
@@ -53,27 +70,5 @@ function get_session_info() {
     ];
 }
 
-/**
- * Set secure session parameters (dashboard style)
- */
-function set_admin_session_params() {
-    if (session_status() === PHP_SESSION_NONE) {
-        // Set secure session parameters only if session not started
-        ini_set('session.cookie_httponly', 1);
-        ini_set('session.cookie_secure', 1);
-        ini_set('session.cookie_samesite', 'Strict');
-        ini_set('session.use_strict_mode', 1);
-        ini_set('session.gc_maxlifetime', 1800); // 30 minutes
-        
-        session_start();
-    }
-    
-    // Set session variables if not set
-    if (!isset($_SESSION['login_time'])) {
-        $_SESSION['login_time'] = time();
-    }
-    if (!isset($_SESSION['last_activity'])) {
-        $_SESSION['last_activity'] = time();
-    }
-}
+
 ?>
